@@ -1,4 +1,6 @@
-import Example from "./Example"
+import { getAllIngredients } from '../apis/ingredients'
+import Example from './Example'
+import { useQuery } from '@tanstack/react-query'
 
 function App() {
   return (
@@ -7,8 +9,7 @@ function App() {
         <h1>My Collection</h1>
       </header>
       <section className="main">
-        
-      <Example/>  
+        <Example />
       </section>
     </>
   )

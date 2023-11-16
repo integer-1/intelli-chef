@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import { getAllIngredients } from '../apis/ingredients'
 
 interface Message {
-  // title: string
   role: string
   content: string
 }
 
-const initialMessage = {
+const initialMessage: Message = {
   role: 'chatGPT',
   content: '',
 }
@@ -17,11 +18,60 @@ function Example() {
   const [previousMessage, setPreviousMessage] = useState<Message[]>([])
   const [title, setTitle] = useState<string | null>(null)
 
+  const {
+    data: ingredients,
+    isLoading,
+    isError,
+  } = useQuery(['ingredients'], getAllIngredients)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (isError) {
+          // Handle error
+          return
+        }
+
+        if (!ingredients || isLoading) {
+          // Handle loading
+          return
+        }
+
+        if (!title && outputMessage && inputMessage) {
+          setTitle(inputMessage)
+        }
+
+        if (title && outputMessage && inputMessage) {
+          setPreviousMessage((previousMessage) => [
+            ...previousMessage,
+            {
+              title: title,
+              role: 'user',
+              content: inputMessage,
+            },
+            {
+              title: title,
+              role: outputMessage.role,
+              content: outputMessage.content,
+            },
+          ])
+        }
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    fetchData()
+  }, [outputMessage, title, inputMessage, isLoading, isError, ingredients])
+
   const getMessages = async () => {
+    const ingredientsList =
+      ingredients?.map((ingredient) => ingredient.item_name).join(', ') || ''
+    const prompt = `Please return a list of recipes using only these ingredients: ${ingredientsList}. The recipes don't need to use all of these ingredients. Please don't provide any additional text.`
     const options = {
       method: 'POST',
       body: JSON.stringify({
-        message: inputMessage,
+        message: prompt,
       }),
       headers: {
         'Content-Type': 'application/json',
@@ -40,30 +90,16 @@ function Example() {
     }
   }
 
-  useEffect(() => {
-    if (!title && outputMessage && inputMessage) {
-      setTitle(inputMessage)
-    }
-    if (title && outputMessage && inputMessage) {
-      setPreviousMessage((previousMessage) => [
-        ...previousMessage,
-        {
-          title: title,
-          role: 'user',
-          content: inputMessage,
-        },
-        {
-          title: title,
-          role: outputMessage.role,
-          content: outputMessage.content,
-        },
-      ])
-    }
-  }, [outputMessage, title, inputMessage])
-
   return (
     <div>
       {!title && <h1>ChatGPT</h1>}
+      <ul>
+        {ingredients?.map((ingredient) => (
+          <li key={ingredient.id}>
+            <p>{ingredient.item_name}</p>
+          </li>
+        ))}
+      </ul>
       <div>
         <div>
           <p>

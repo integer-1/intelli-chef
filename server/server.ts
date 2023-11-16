@@ -1,3 +1,4 @@
+import ingredientRoutes from './routes/ingredients.ts'
 import * as Path from 'node:path'
 import express from 'express'
 import cors from 'cors'
@@ -9,6 +10,8 @@ const apiChatKey = process.env.CHAT_API_KEY
 const server = express()
 server.use(express.json())
 server.use(cors())
+
+server.use('/api/v1/ingredients', ingredientRoutes)
 
 if (process.env.NODE_ENV === 'production') {
   server.use(express.static(Path.resolve('public')))
