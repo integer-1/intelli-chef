@@ -1,10 +1,17 @@
+import ingredientRoutes from './routes/ingredients.ts'
 import * as Path from 'node:path'
-
 import express from 'express'
+import cors from 'cors'
+import { config } from 'dotenv'
+config()
 
+const apiChatKey = process.env.CHAT_API_KEY
 
 const server = express()
 server.use(express.json())
+server.use(cors())
+
+server.use('/api/v1/ingredients', ingredientRoutes)
 
 if (process.env.NODE_ENV === 'production') {
   server.use(express.static(Path.resolve('public')))
@@ -13,5 +20,30 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(Path.resolve('./dist/index.html'))
   })
 }
+
+server.post('/completions', async (req, res) => {
+  const options = {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${apiChatKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      model: 'gpt-3.5-turbo',
+      messages: [{ role: 'user', content: req.body.message }],
+      max_tokens: 100,
+    }),
+  }
+  try {
+    const response = await fetch(
+      'https://api.openai.com/v1/chat/completions',
+      options
+    )
+    const data = await response.json()
+    res.send(data)
+  } catch (error) {
+    console.error(error)
+  }
+})
 
 export default server
