@@ -12,7 +12,7 @@ const initialMessage: Message = {
   content: '',
 }
 
-function Example() {
+function KitchenBuilder() {
   const [inputMessage, setInputMessage] = useState<string | null>(null)
   const [outputMessage, setOutputMessage] = useState<Message>(initialMessage)
   const [previousMessage, setPreviousMessage] = useState<Message[]>([])
@@ -126,4 +126,4 @@ function Example() {
   )
 }
 
-export default Example
+export default KitchenBuilder

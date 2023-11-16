@@ -1,5 +1,5 @@
 import { getAllIngredients } from '../apis/ingredients'
-import Example from './Example'
+import KitchenBuilder from './KitchenBuilder'
 import { useQuery } from '@tanstack/react-query'
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
         <h1>My Collection</h1>
       </header>
       <section className="main">
-        <Example />
+        <KitchenBuilder />
       </section>
     </>
   )
