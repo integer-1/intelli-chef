@@ -1,4 +1,4 @@
-# FIntelliChef
+# IntelliChef
 
 Project Description
 
