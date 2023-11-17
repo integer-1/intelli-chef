@@ -67,7 +67,7 @@ function KitchenBuilder() {
   const getMessages = async () => {
     const ingredientsList =
       ingredients?.map((ingredient) => ingredient.item_name).join(', ') || ''
-    const prompt = `Please return a list of recipes using only these ingredients: ${ingredientsList}. The recipes don't need to use all of these ingredients. Please don't provide any additional text.`
+    const prompt = `Please return a list of ingredients using only these ingredients: ${ingredientsList}. The ingredients don't need to use all of these ingredients. Please don't provide any additional text.`
     const options = {
       method: 'POST',
       body: JSON.stringify({
@@ -92,7 +92,17 @@ function KitchenBuilder() {
 
   return (
     <div>
-      {!title && <h1>ChatGPT</h1>}
+      <div>
+        <input
+          type="text"
+          id="chat-input"
+          name="input"
+          placeholder="Put your message..."
+          value={inputMessage || ''}
+          onChange={(e) => setInputMessage(e.target.value)}
+        />
+        <button onClick={getMessages}>send</button>
+      </div>
       <ul>
         {ingredients?.map((ingredient) => (
           <li key={ingredient.id}>
@@ -109,17 +119,6 @@ function KitchenBuilder() {
             <strong>Chat GPT : </strong>
             {outputMessage.content}
           </p>
-        </div>
-        <div>
-          <input
-            type="text"
-            id="chat-input"
-            name="input"
-            placeholder="Put your message..."
-            value={inputMessage || ''}
-            onChange={(e) => setInputMessage(e.target.value)}
-          />
-          <button onClick={getMessages}>send</button>
         </div>
       </div>
     </div>
