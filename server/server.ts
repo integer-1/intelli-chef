@@ -1,4 +1,6 @@
 import ingredientRoutes from './routes/ingredients.ts'
+import recipesRoutes from './routes/recipes.ts'
+
 import * as Path from 'node:path'
 import express from 'express'
 import cors from 'cors'
@@ -12,6 +14,8 @@ server.use(express.json())
 server.use(cors())
 
 server.use('/api/v1/ingredients', ingredientRoutes)
+server.use('/api/v1/recipes', recipesRoutes)
+
 
 if (process.env.NODE_ENV === 'production') {
   server.use(express.static(Path.resolve('public')))
@@ -21,6 +25,8 @@ if (process.env.NODE_ENV === 'production') {
   })
 }
 
+
+//for connecting Chat GPT API
 server.post('/completions', async (req, res) => {
   const options = {
     method: 'POST',
