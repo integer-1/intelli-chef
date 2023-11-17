@@ -34,7 +34,7 @@ function RecipeGenerator() {
       const ingredientsList = ingredients
         .map((ingredient) => ingredient.item_name)
         .join(', ')
-      const prompt = `Please return a list of recipes using only these ingredients: ${ingredientsList}. The recipes don't need to use all of these ingredients. Please don't provide any additional text.`
+      const prompt = `From now you when you respond you will only provide a codeblock with json and nothing else. You will consider this list of ingredients: ${ingredientsList} and provide a maximum of 3 recipes containing ONLY the ingredients specific and absolutely no additional ingredients. The json will have the following properties: dish_name, preparation_time, cooking_time, servings, ingredients and method. Remember you must provide only a codeblock containing json, absolutely no additional text.`
 
       const options = {
         method: 'POST',
@@ -53,7 +53,11 @@ function RecipeGenerator() {
       }
 
       const data = await response.json()
-      setOutputMessage(data.choices[0].message)
+      if (data.choices && data.choices.length > 0) {
+        setOutputMessage(data.choices[0].message)
+      } else {
+        console.error('No choices found in the response.')
+      }
     } catch (error) {
       console.error(error)
     }
@@ -61,13 +65,12 @@ function RecipeGenerator() {
 
   return (
     <div>
-      <div>
-        <p>
-          <strong>Chat GPT : </strong>
-          {outputMessage.content}
-        </p>
-      </div>
+      <h2>Recipe Generator</h2>
       <button onClick={fetchData}>Generate Recipes</button>
+      <div>
+        <strong>Chat GPT : </strong>
+        <p>{outputMessage.content}</p>
+      </div>
     </div>
   )
 }
