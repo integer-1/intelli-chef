@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { addIngredient, updateIngredient } from '../apis/ingredients'
 import { deleteIngredient } from '../apis/ingredients'
 
-export function useIngredients() {
+export function useIngredient() {
   const queryClient = useQueryClient()
 
   const updateIngredientMutation = useMutation(updateIngredient, {
