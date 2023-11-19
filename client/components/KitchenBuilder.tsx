@@ -4,6 +4,8 @@ import { getAllIngredients } from '../apis/ingredients'
 import { Ingredient, IngredientData } from '../../models/ingredients'
 import { useIngredient } from '../hooks/useIngredients'
 
+import styles from './KitchenBuilder.module.css'
+
 function KitchenBuilder() {
   const {
     data: ingredients,

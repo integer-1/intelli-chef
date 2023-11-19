@@ -1,7 +1,5 @@
-import { getAllIngredients } from '../apis/ingredients'
 import KitchenBuilder from './KitchenBuilder'
 import RecipeGenerator from './RecipeGenerator'
-import { useQuery } from '@tanstack/react-query'
 import SideBar from './SideBar'
 
 function App() {
