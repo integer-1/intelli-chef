@@ -37,7 +37,7 @@ server.post('/completions', async (req, res) => {
     body: JSON.stringify({
       model: 'gpt-3.5-turbo',
       messages: [{ role: 'user', content: req.body.message }],
-      max_tokens: 100,
+      max_tokens: 1000,
     }),
   }
   try {
@@ -46,6 +46,7 @@ server.post('/completions', async (req, res) => {
       options
     )
     const data = await response.json()
+    console.log('OpenAI API Response:', data)
     res.send(data)
   } catch (error) {
     console.error(error)
