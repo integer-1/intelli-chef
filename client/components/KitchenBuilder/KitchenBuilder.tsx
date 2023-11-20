@@ -87,7 +87,7 @@ approach. - jayde */
       <div>
         <h3>Kitchen</h3>
         <div className={styles['kitchen-box']}>
-          <div className="kitchen-items">
+          <div className={styles['kitchen-items']}>
             {selectedIngredients.map((ingredient, index) => (
               <div className={styles['item-box']} key={index}>
                 {ingredient.item_name}

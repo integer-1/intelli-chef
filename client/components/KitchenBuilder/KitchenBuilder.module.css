@@ -18,8 +18,8 @@
 
 .kitchen-items{
   width: fit-content;
-  /* display: flex;
+  display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  align-items: flex-start; */
+  align-items: flex-start;
 }
