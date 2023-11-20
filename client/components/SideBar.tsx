@@ -1,25 +1,18 @@
-import React, { ReactNode, useState } from 'react'
+import { useState } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
-
-import {
-  FridgeIcon,
-  PlusIcon,
-  RecipesIcon,
-  XIcon,
-  BackIcon,
-  MenuBar,
-  ChefIcon,
-  KitchenIcon,
-} from './Icons.tsx'
 import { NavLink } from 'react-router-dom'
 import MyRecipeList from './MyRecipeList.tsx'
 
-interface SideBarProps {
-  children: ReactNode
-}
+import {
+  FridgeIcon,
+  RecipesIcon,
+  XIcon,
+  MenuBar,
+  KitchenIcon,
+} from './Icons.tsx'
 
-const SideBar: React.FC<SideBarProps> = ({ children }) => {
+const SideBar = () => {
   const { loginWithRedirect, logout, user } = useAuth0()
 
   const [isOpen, setIsOpen] = useState(false)
@@ -37,11 +30,8 @@ const SideBar: React.FC<SideBarProps> = ({ children }) => {
     <div className="sidebar-container">
       <div style={{ width: isOpen ? '250px' : '60px' }} className="sidebar">
         <div className="top_section">
-          <h1 style={{ display: isOpen ? 'block' : 'none' }} className="logo">
-            IntelliChef
-          </h1>
           <div
-            style={{ marginLeft: isOpen ? '60px' : '-10px' }}
+            style={{ marginLeft: isOpen ? '-10px' : '-10px' }}
             className="bars"
             onClick={isOpen ? closeSidebar : openSidebar}
             onKeyDown={(e) => {
@@ -56,9 +46,26 @@ const SideBar: React.FC<SideBarProps> = ({ children }) => {
           </div>
         </div>
 
+        {/* <img
+          src="../../public/images/logo1.png"
+          alt="IntelliChef-logo"
+          style={{ display: isOpen ? 'block' : 'none' }}
+          className="logo"
+        /> */}
         <IfAuthenticated>
+          <p
+            className="authentication"
+            style={{ display: isOpen ? 'block' : 'none' }}
+          >
+            {user?.nickname}`s recipe
+          </p>
+
           {menuItem.map((item, index) => (
-            <NavLink to={item.path} key={index} className="link">
+            <NavLink
+              to={item.path}
+              key={index}
+              className={`link${isOpen ? '' : '-close'}`}
+            >
               <div className="icon">{item.icon}</div>
               <div
                 style={{ display: isOpen ? 'block' : 'none' }}
@@ -68,25 +75,21 @@ const SideBar: React.FC<SideBarProps> = ({ children }) => {
               </div>
             </NavLink>
           ))}
-
           <div style={{ display: isOpen ? 'block' : 'none' }}>
             <MyRecipeList />
-          </div>
 
-          <p className="authentication">Hi , {user?.nickname}</p>
-          <button className="button" onClick={() => logout()}>
-            Logout
-          </button>
+            <button className="login-button" onClick={() => logout()}>
+              Logout
+            </button>
+          </div>
         </IfAuthenticated>
 
         <IfNotAuthenticated>
-          <p>Please login</p>
-          <button className="button" onClick={() => loginWithRedirect()}>
+          <button className="login-button" onClick={() => loginWithRedirect()}>
             Login
           </button>
         </IfNotAuthenticated>
       </div>
-      <main>{children}</main>
     </div>
   )
 }
