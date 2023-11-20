@@ -16,7 +16,6 @@ server.use(cors())
 server.use('/api/v1/ingredients', ingredientRoutes)
 server.use('/api/v1/recipes', recipesRoutes)
 
-
 if (process.env.NODE_ENV === 'production') {
   server.use(express.static(Path.resolve('public')))
   server.use('/assets', express.static(Path.resolve('./dist/assets')))
@@ -24,7 +23,6 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(Path.resolve('./dist/index.html'))
   })
 }
-
 
 //for connecting Chat GPT API
 server.post('/completions', async (req, res) => {

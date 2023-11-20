@@ -52,9 +52,11 @@ function RecipeGenerator() {
         throw new Error(`Server responded with status: ${response.status}`)
       }
 
-      const data = await response.json()
+      const data = await response.json() // receive and store json data
       if (data.choices && data.choices.length > 0) {
-        setOutputMessage(data.choices[0].message)
+        console.log(data)
+        setOutputMessage(data.choices[0].message) // set outputMessage to have JSON
+        console.log('Simplified data:', data.choices[0].message.content)
       } else {
         console.error('No choices found in the response.')
       }
