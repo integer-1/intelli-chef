@@ -6,12 +6,12 @@ function App() {
   return (
     <>
       <header className="header">
-        <h1>My Collection</h1>
+        <h1>IntelliChef</h1>
       </header>
+        <SideBar/>
       <section className="main">
         <KitchenBuilder />
         <RecipeGenerator />
-        <SideBar/>
       </section>
     </>
   )
