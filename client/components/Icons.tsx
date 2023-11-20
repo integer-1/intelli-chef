@@ -168,8 +168,8 @@ export const MenuBar = () => {
 export const ChefIcon = () => {
   return (
     <svg
-      width="80px"
-      height="80px"
+      width="13px"
+      height="13px"
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -229,3 +229,5 @@ export const KitchenIcon = () => {
     </svg>
   )
 }
+
+

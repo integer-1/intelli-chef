@@ -8,7 +8,7 @@ function App() {
       <header className="header">
         <h1>IntelliChef</h1>
       </header>
-        <SideBar/>
+        <SideBar />
       <section className="main">
         <KitchenBuilder />
         <RecipeGenerator />
