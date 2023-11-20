@@ -8,41 +8,70 @@ body {
   font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+/* Side Bar */
 .sidebar-container {
   display: flex;
+  position: fixed;
+  top: 0;
+  right: 0;
 }
 
 .sidebar {
-  background-color: pink;
+  background-color: blanchedalmond;
   color: black;
   height: 100vh;
   width: 300px;
+  transition: width 0.5s;
+  border-radius: 10px;
+  margin: 5px;
 }
 
-.top_section {
+.sidebar .top_section {
   display: flex;
   align-items: center;
-  padding: 20px 15px;
+  padding: 20px;
 }
 
-.logo {
+.sidebar .logo {
   font-size: 25px;
 }
 
-.bars {
+.sidebar .bars {
   display: flex;
   margin-left: 50px;
 }
 
-.link {
+.sidebar .link {
   display: flex;
   color: black;
-  padding : 10px 15px;
-  gap:15px;
+  padding: 10px 10px;
+  gap: 30px;
+  transition: all 0.5s;
+  text-decoration: none;
   transition: all 0.5s;
 }
 
-.link:hover{
-  background-color: blanchedalmond;
-  color: red;
+.sidebar .link_text {
+  padding-top: 10px;
+  font-size: 15px;
+}
+
+.sidebar .link:hover {
+  background-color: rgb(251, 250, 248);
+  color: rgb(70, 138, 18);
+}
+
+.sidebar .authentication {
+  align-items: center;
+}
+
+.recipe-list {
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.recipe-list ul li {
+  color: black;
 }
