@@ -1,9 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
-import React from 'react'
 import { getRecipes } from '../apis/recipes'
 import { Link } from 'react-router-dom'
+import { ChefIcon } from './Icons'
+// import { useAuth0 } from '@auth0/auth0-react'
 
 const MyRecipeList = () => {
+  // const { getAccessTokenSilently } = useAuth0()
+  // const token = await getAccessTokenSilently()
   const {
     data: recipes,
     isError,
@@ -22,13 +25,18 @@ const MyRecipeList = () => {
     return <p>...loading</p>
   }
 
+
+
   return (
     <div className="recipe-list">
-      <h4>MyRecipeList</h4>
+      <h3>My Recipe List</h3>
       <ul>
         {recipes.map((recipe) => (
           <li key={recipe.id}>
-            <Link to={`/RecipeCard/${recipe.id}`}>{recipe.dish_name}</Link>
+            <ChefIcon />
+            <Link to={`/RecipeCard/${recipe.id}`} className="recipe-link">
+              {recipe.dish_name}
+            </Link>
           </li>
         ))}
       </ul>
