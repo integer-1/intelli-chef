@@ -1,0 +1,25 @@
+.kitchen-builder{
+  margin: 50px;
+}
+
+.item-box{
+  border: 1px solid black;
+  width:fit-content;
+  height: fit-content;
+  margin: 5px;
+  padding: 10px;
+}
+
+.kitchen-box{
+  border: 1px solid black;
+  height: 30vh;
+  width: 100%;
+}
+
+.kitchen-items{
+  width: fit-content;
+  /* display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: flex-start; */
+}
