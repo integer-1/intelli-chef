@@ -55,15 +55,13 @@ function RecipeGenerator() {
         throw new Error(`Server responded with status: ${response.status}`)
       }
 
-      const data = await response.json() // receive and store json data
+      const data = await response.json() 
 
       if (data.choices && data.choices.length > 0) {
         console.log('data received and now being processed....')
-        console.log(data.choices[0].message['content'])
-        setOutputMessage(data.choices[0].message)
-        //console.log(outputMessage.content)
-        //const refinedData = refineJsonData(outputMessage.content)
-        //setDisplayedMessage(refinedData)
+        const stringValue1: string = data.choices[0].message['content']
+        const refinedData = stringValue1.replace(/\\|\n|`|json/g, '')
+        setDisplayedMessage(refinedData)
       } else {
         console.error('No choices found in the response.')
       }
@@ -72,28 +70,13 @@ function RecipeGenerator() {
     }
   }
 
-  // const refineJsonData = (rawData: any): string => {
-  //   try {
-  //     console.log('data is now being processed')
-  //     const jsonString: string = JSON.stringify(rawData, null, 2)
-  //     const refinedJsonString: string = jsonString.replace(
-  //       '/[`"]|json|\n/g',
-  //       ''
-  //     )
-  //     return refinedJsonString
-  //   } catch (error) {
-  //     console.error('Error parsing JSON:', error)
-  //     return 'Error refining JSON data'
-  //   }
-  // }
-
   return (
     <div>
       <h2>Recipe Generator</h2>
       <button onClick={fetchData}>Generate Recipes</button>
       <div>
         <strong>Chat GPT : </strong>
-        <p>{outputMessage.content}</p>
+        <p>{displayedMessage}</p>
       </div>
     </div>
   )
