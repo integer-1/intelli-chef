@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { getAllIngredients } from '../apis/ingredients'
 
@@ -14,6 +14,7 @@ const initialMessage: Message = {
 
 function RecipeGenerator() {
   const [outputMessage, setOutputMessage] = useState<Message>(initialMessage)
+  const [displayedMessage, setDisplayedMessage] = useState<string>('')
 
   const {
     data: ingredients,
@@ -22,12 +23,14 @@ function RecipeGenerator() {
   } = useQuery(['ingredients'], getAllIngredients)
 
   const fetchData = async () => {
+    console.log('data loaded')
     try {
       if (isLoading) {
         return <p>Loading...</p>
       }
 
       if (isError) {
+        console.log('No data loaded')
         return <p>Error retrieving data!</p>
       }
 
@@ -53,10 +56,12 @@ function RecipeGenerator() {
       }
 
       const data = await response.json() // receive and store json data
+
       if (data.choices && data.choices.length > 0) {
-        console.log(data)
-        setOutputMessage(data.choices[0].message) // set outputMessage to have JSON
-        console.log('Simplified data:', data.choices[0].message.content)
+        console.log('data received and now being processed....')
+        setOutputMessage(data.choices[0].message)
+        //const refinedData = refineJsonData(outputMessage.content)
+        //setDisplayedMessage(refinedData)
       } else {
         console.error('No choices found in the response.')
       }
@@ -64,6 +69,21 @@ function RecipeGenerator() {
       console.error(error)
     }
   }
+
+  // const refineJsonData = (rawData: any): string => {
+  //   try {
+  //     console.log('data is now being processed')
+  //     const jsonString: string = JSON.stringify(rawData, null, 2)
+  //     const refinedJsonString: string = jsonString.replace(
+  //       '/[`"]|json|\n/g',
+  //       ''
+  //     )
+  //     return refinedJsonString
+  //   } catch (error) {
+  //     console.error('Error parsing JSON:', error)
+  //     return 'Error refining JSON data'
+  //   }
+  // }
 
   return (
     <div>
