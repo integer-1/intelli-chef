@@ -18,9 +18,6 @@ const SideBar = () => {
   const openSidebar = () => setIsOpen(true)
   const closeSidebar = () => setIsOpen(false)
 
-  const auth0Id = user?.sub
-  if (!auth0Id) return null
-
   const menuItem = [
     { path: '/', name: 'Home', icon: <FridgeIcon /> },
     { path: '/MyKitchen', name: 'My Kitchen', icon: <KitchenIcon /> },
@@ -71,7 +68,7 @@ const SideBar = () => {
             </NavLink>
           ))}
           <div style={{ display: isOpen ? 'block' : 'none' }}>
-            <MyRecipeList authId={auth0Id} />
+            <MyRecipeList authId={user?.sub || ''} />
 
             <button className="login-button" onClick={() => logout()}>
               Logout
@@ -80,6 +77,7 @@ const SideBar = () => {
         </IfAuthenticated>
 
         <IfNotAuthenticated>
+          <p>Please log in here</p>
           <button className="login-button" onClick={() => loginWithRedirect()}>
             Login
           </button>

@@ -15,9 +15,7 @@ const MyRecipeList: React.FC<UserProps> = ({ authId }) => {
     isLoading,
   } = useQuery(['recipes'], getRecipes)
 
-  const foundRecipe = recipes?.find((recipe) => recipe.auth0_id === authId)
-
-  console.log(foundRecipe)
+  const foundRecipes = recipes?.filter((recipe) => recipe.auth0_id === authId);
 
   if (isError) {
     return (
@@ -27,7 +25,7 @@ const MyRecipeList: React.FC<UserProps> = ({ authId }) => {
     )
   }
 
-  if (!foundRecipe || isLoading) {
+  if (!foundRecipes || isLoading) {
     return <p>...loading</p>
   }
 
@@ -35,16 +33,14 @@ const MyRecipeList: React.FC<UserProps> = ({ authId }) => {
     <div className="recipe-list">
       <h3>My Recipe List</h3>
       <ul>
-        <ChefIcon />
-        {foundRecipe.dish_name}
-        {/* {foundRecipe.map((recipe) => (
+        {foundRecipes.map((recipe) => (
           <li key={recipe.id}>
             <ChefIcon />
             <Link to={`/RecipeCard/${recipe.id}`} className="recipe-link">
               {recipe.dish_name}
             </Link>
           </li>
-        ))} */}
+        ))}
       </ul>
     </div>
   )

@@ -111,7 +111,7 @@ export async function seed(knex) {
 
         5. Serve:
         Serve the Grilled Lemon Herb Chicken with your favorite side dishes. Enjoy!`,
-        auth0_id: 'auth0|6556c9c747db98bd7f4edb4f',
+      auth0_id: 'auth0|6556c9c747db98bd7f4edb4f',
     },
     // Add more recipes as needed
   ])
