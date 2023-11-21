@@ -20,7 +20,14 @@ Explain the basic steps to run and use the project.
     npm i
     npm run dev
     ```
+
+    ```sh
+    npm run knex migrate:latest
+    npm run knex seed:run
+    ```
   </details>
+
+
 
 ---
 

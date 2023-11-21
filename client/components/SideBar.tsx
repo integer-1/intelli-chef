@@ -14,9 +14,7 @@ import {
 
 const SideBar = () => {
   const { loginWithRedirect, logout, user } = useAuth0()
-
   const [isOpen, setIsOpen] = useState(false)
-
   const openSidebar = () => setIsOpen(true)
   const closeSidebar = () => setIsOpen(false)
 
@@ -46,12 +44,6 @@ const SideBar = () => {
           </div>
         </div>
 
-        {/* <img
-          src="../../public/images/logo1.png"
-          alt="IntelliChef-logo"
-          style={{ display: isOpen ? 'block' : 'none' }}
-          className="logo"
-        /> */}
         <IfAuthenticated>
           <p
             className="authentication"
@@ -76,7 +68,7 @@ const SideBar = () => {
             </NavLink>
           ))}
           <div style={{ display: isOpen ? 'block' : 'none' }}>
-            <MyRecipeList />
+            <MyRecipeList authId={user?.sub || ''} />
 
             <button className="login-button" onClick={() => logout()}>
               Logout
@@ -85,6 +77,7 @@ const SideBar = () => {
         </IfAuthenticated>
 
         <IfNotAuthenticated>
+          <p>Please log in here</p>
           <button className="login-button" onClick={() => loginWithRedirect()}>
             Login
           </button>

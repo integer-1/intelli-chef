@@ -6,4 +6,5 @@ export interface Recipes {
   servings: number
   ingredients: string
   method: string
+  auth0_id: string
 }
