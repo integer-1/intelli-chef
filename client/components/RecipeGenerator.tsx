@@ -1,6 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
+import { Link, Routes, Route, useNavigate } from 'react-router-dom'
 import { getAllIngredients } from '../apis/ingredients'
+
+import { Recipes } from '../../models/recipes'
 
 interface Message {
   role: string
@@ -14,7 +17,9 @@ const initialMessage: Message = {
 
 function RecipeGenerator() {
   const [outputMessage, setOutputMessage] = useState<Message>(initialMessage)
-  const [displayedMessage, setDisplayedMessage] = useState<string>('')
+  const [recipeList, setRecipeList] = useState<Recipes[]>([])
+
+  const navigate = useNavigate()
 
   const {
     data: ingredients,
@@ -55,13 +60,15 @@ function RecipeGenerator() {
         throw new Error(`Server responded with status: ${response.status}`)
       }
 
-      const data = await response.json() 
+      const data = await response.json()
 
       if (data.choices && data.choices.length > 0) {
         console.log('data received and now being processed....')
         const stringValue1: string = data.choices[0].message['content']
-        const refinedData = stringValue1.replace(/\\|\n|`|json/g, '')
-        setDisplayedMessage(refinedData)
+        const refinedData = stringValue1.replace(/\\|\n|`|json|/g, '')
+        const jsonArray = JSON.parse(refinedData)
+        console.log(jsonArray)
+        setRecipeList(jsonArray)
       } else {
         console.error('No choices found in the response.')
       }
@@ -70,13 +77,29 @@ function RecipeGenerator() {
     }
   }
 
+  const navigateRecipe = () => {
+    // 👇️ navigate to /
+    navigate('/recipe')
+  }
+
   return (
     <div>
       <h2>Recipe Generator</h2>
       <button onClick={fetchData}>Generate Recipes</button>
       <div>
         <strong>Chat GPT : </strong>
-        <p>{displayedMessage}</p>
+        <ul>
+          {recipeList.map((recipe) => (
+            <li key={recipe.dish_name}>
+              <Link to={`/recipe`} state={recipe.dish_name}>
+                <strong>{recipe.dish_name}</strong>
+              </Link>
+              <p>Preparation Time: {recipe.preparation_time}</p>
+              <p>Ingredients: {recipe.ingredients.join(', ')}</p>
+              <hr />
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   )
