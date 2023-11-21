@@ -46,13 +46,19 @@ approach. - jayde */
         const newIngredient: IngredientData = {
           item_name: searchInput,
         }
+        setSearchInput('')
         await addIngredientMutation.mutateAsync(newIngredient)
         const updatedIngredients = await getAllIngredients()
         setSelectedIngredients([...updatedIngredients])
-        setSearchInput('')
       } catch (e) {
         console.error('Error adding ingredient:', e)
       }
+    }
+  }
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleAddToKitchen()
     }
   }
 
@@ -82,20 +88,24 @@ approach. - jayde */
         placeholder="Add ingredient..."
         value={searchInput}
         onChange={(e) => setSearchInput(e.target.value)}
+        onKeyDown={handleKeyDown}
       />
-      {searchInput && <div className={styles['item-box']}>{searchInput}</div>}
       <div>
-        <h3>Kitchen</h3>
         <div className={styles['kitchen-box']}>
           <div className={styles['kitchen-items']}>
             {selectedIngredients.map((ingredient, index) => (
               <div className={styles['item-box']} key={index}>
                 {ingredient.item_name}
                 <button onClick={() => handleDeleteFromKitchen(ingredient)}>
-                  Delete
+                  <div className={styles['img-wrapper']}>
+                    <img src="/svg/x.svg" alt="delete button"></img>
+                  </div>
                 </button>
               </div>
             ))}
+            {searchInput && (
+              <div className={styles['item-box']}>{searchInput}</div>
+            )}
           </div>
         </div>
       </div>
