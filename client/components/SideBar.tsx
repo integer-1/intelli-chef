@@ -14,9 +14,8 @@ import {
 
 const SideBar = () => {
   const { loginWithRedirect, logout, user } = useAuth0()
-
+  
   const [isOpen, setIsOpen] = useState(false)
-
   const openSidebar = () => setIsOpen(true)
   const closeSidebar = () => setIsOpen(false)
 
@@ -46,12 +45,6 @@ const SideBar = () => {
           </div>
         </div>
 
-        {/* <img
-          src="../../public/images/logo1.png"
-          alt="IntelliChef-logo"
-          style={{ display: isOpen ? 'block' : 'none' }}
-          className="logo"
-        /> */}
         <IfAuthenticated>
           <p
             className="authentication"

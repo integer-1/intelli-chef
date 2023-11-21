@@ -7,3 +7,10 @@ export interface Recipes {
   ingredients: string
   method: string
 }
+
+
+export interface SavedRecipes {
+  id: number;
+  user_id: number;
+  recipe_ids: number[];
+}

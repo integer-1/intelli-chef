@@ -3,10 +3,11 @@
  * @returns { Promise<void> }
  */
 export function up(knex) {
-  return knex.schema.createTable('saved_recipes', (table) => {
+  return knex.schema.createTable('users', (table) => {
     table.increments('id').primary()
-    table.integer('user_id')
-    table.specificType('recipe_ids', 'integer[]')
+    table.string('nickname')
+    table.string('email')
+    table.string('token')
   })
 }
 
@@ -15,6 +16,6 @@ export function up(knex) {
  * @returns { Promise<void> }
  */
 export function down(knex) {
-  return knex.schema.dropTable('saved_recipes')
+  return knex.schema.dropTable('users')
 
 }
