@@ -10,7 +10,7 @@
 
 .item-box{
   font-size: large;
-  border: 1px solid black;
+  border: 1px dashed black;
   width:fit-content;
   height: fit-content;
   margin: 10px 0 0 10px;
@@ -31,7 +31,7 @@
 }
 
 .kitchen-box{
-  border: 1px solid black;
+  border: 4px dashed rgb(128, 187, 119);
   height: 30vh;
   width: 100%;
 }
