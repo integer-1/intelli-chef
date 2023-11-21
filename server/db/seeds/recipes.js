@@ -45,6 +45,7 @@ export async function seed(knex) {
         Garnish the stir-fry with sliced green onions. Taste and adjust the seasoning if necessary.
         
         Serve the onion and pork stir-fry over cooked rice.`,
+      auth0_id: 'auth0|655b4ab77ebf1e881985fe63',
     },
     {
       id: 1002,
@@ -79,6 +80,7 @@ export async function seed(knex) {
 
         5. Serve:
         Dish out the Spaghetti Bolognese into bowls. Sprinkle with grated Parmesan cheese and serve hot.`,
+      auth0_id: 'auth0|6556c9c747db98bd7f4edb4f',
     },
     {
       id: 1003,
@@ -109,6 +111,7 @@ export async function seed(knex) {
 
         5. Serve:
         Serve the Grilled Lemon Herb Chicken with your favorite side dishes. Enjoy!`,
+        auth0_id: 'auth0|6556c9c747db98bd7f4edb4f',
     },
     // Add more recipes as needed
   ])

@@ -1,6 +1,6 @@
 export interface User {
-  id: number;
-  nickname: string;
-  email: string;
-  token: string;
+  id: number
+  nickname: string
+  email: string
+  auth0_id: string
 }

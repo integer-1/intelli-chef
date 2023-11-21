@@ -11,6 +11,7 @@ export function up(knex) {
     table.integer('servings')
     table.string('ingredients')
     table.string('method')
+    table.string('auth0_id')
   })
 }
 

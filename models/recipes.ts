@@ -6,11 +6,5 @@ export interface Recipes {
   servings: number
   ingredients: string
   method: string
-}
-
-
-export interface SavedRecipes {
-  id: number;
-  user_id: number;
-  recipe_ids: number[];
+  auth0_id: string
 }

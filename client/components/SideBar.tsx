@@ -14,10 +14,12 @@ import {
 
 const SideBar = () => {
   const { loginWithRedirect, logout, user } = useAuth0()
-  
   const [isOpen, setIsOpen] = useState(false)
   const openSidebar = () => setIsOpen(true)
   const closeSidebar = () => setIsOpen(false)
+
+  const auth0Id = user?.sub
+  if (!auth0Id) return null
 
   const menuItem = [
     { path: '/', name: 'Home', icon: <FridgeIcon /> },
@@ -69,7 +71,7 @@ const SideBar = () => {
             </NavLink>
           ))}
           <div style={{ display: isOpen ? 'block' : 'none' }}>
-            <MyRecipeList />
+            <MyRecipeList authId={auth0Id} />
 
             <button className="login-button" onClick={() => logout()}>
               Logout

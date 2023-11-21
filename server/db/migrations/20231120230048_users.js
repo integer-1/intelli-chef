@@ -7,7 +7,7 @@ export function up(knex) {
     table.increments('id').primary()
     table.string('nickname')
     table.string('email')
-    table.string('token')
+    table.string('auth0_id')
   })
 }
 

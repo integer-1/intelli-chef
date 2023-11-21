@@ -1,25 +1,23 @@
 import { useQuery } from '@tanstack/react-query'
-import { getRecipes, getSavedRecipes } from '../apis/recipes'
+import { getRecipes } from '../apis/recipes'
 import { Link } from 'react-router-dom'
 import { ChefIcon } from './Icons'
 import { useAuth0 } from '@auth0/auth0-react'
 
-const MyRecipeList = () => {
-  const { getAccessTokenSilently } = useAuth0()
+interface UserProps {
+  authId: string
+}
 
-  const fetchData = async () => {
-    const token = await getAccessTokenSilently()
-console.log('list' + token)
-    const savedRecipesData = await Promise.all([getSavedRecipes({ token })])
-
-    console.log(savedRecipesData)
-    return { savedRecipes: savedRecipesData }
-  }
+const MyRecipeList: React.FC<UserProps> = ({ authId }) => {
   const {
-    data: savedRecipes,
+    data: recipes,
     isError,
     isLoading,
-  } = useQuery(['savedRecipes'], fetchData)
+  } = useQuery(['recipes'], getRecipes)
+
+  const foundRecipe = recipes?.find((recipe) => recipe.auth0_id === authId)
+
+  console.log(foundRecipe)
 
   if (isError) {
     return (
@@ -29,15 +27,25 @@ console.log('list' + token)
     )
   }
 
-  if (!savedRecipes || isLoading) {
+  if (!foundRecipe || isLoading) {
     return <p>...loading</p>
   }
 
   return (
     <div className="recipe-list">
       <h3>My Recipe List</h3>
-        {savedRecipes.savedRecipes}
-
+      <ul>
+        <ChefIcon />
+        {foundRecipe.dish_name}
+        {/* {foundRecipe.map((recipe) => (
+          <li key={recipe.id}>
+            <ChefIcon />
+            <Link to={`/RecipeCard/${recipe.id}`} className="recipe-link">
+              {recipe.dish_name}
+            </Link>
+          </li>
+        ))} */}
+      </ul>
     </div>
   )
 }
