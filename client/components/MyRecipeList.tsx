@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query'
 import { getRecipes } from '../apis/recipes'
 import { Link } from 'react-router-dom'
 import { ChefIcon } from './Icons'
-import { useAuth0 } from '@auth0/auth0-react'
 
 interface UserProps {
   authId: string
