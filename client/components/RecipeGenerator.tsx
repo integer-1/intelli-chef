@@ -59,7 +59,9 @@ function RecipeGenerator() {
 
       if (data.choices && data.choices.length > 0) {
         console.log('data received and now being processed....')
+        console.log(data.choices[0].message['content'])
         setOutputMessage(data.choices[0].message)
+        //console.log(outputMessage.content)
         //const refinedData = refineJsonData(outputMessage.content)
         //setDisplayedMessage(refinedData)
       } else {
