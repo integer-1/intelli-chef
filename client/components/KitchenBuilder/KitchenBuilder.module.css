@@ -9,10 +9,14 @@
 }
 
 .kitchen-builder h2{
+  font-family: 'Itim';
+  font-size: 25px;
   margin: 0;
+  margin-bottom: 20px;
 }
 
 .kitchen-builder input{
+  font-family: Neucha;
   border: 2px dashed rgb(128, 187, 119);
   border-radius: 20px;
   height: 20px;

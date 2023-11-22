@@ -49,7 +49,7 @@ approach. - jayde */
     }
   }
 
-  const handleKeyDown = (event) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
     if (event.key === 'Enter') {
       handleAddToKitchen()
     }
@@ -76,7 +76,7 @@ approach. - jayde */
   return (
     <div className={styles['kitchen-builder-wrapper']}>
       <div className={styles['kitchen-builder']}>
-        <h2>What's in my Kitchen?</h2>
+        <h2>What&apos;s in my Kitchen?</h2>
         <input
           type="text"
           placeholder="Add ingredient..."
