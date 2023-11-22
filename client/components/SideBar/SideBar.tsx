@@ -61,7 +61,7 @@ const SideBar = () => {
             <NavLink
               to={item.path}
               key={index}
-              className={`$styles[link]} ${isOpen ? '' : styles['-close']}`}
+              className={styles[`link${isOpen ? '' : '-close'}`]}
             >
               <div className={styles['icon']}>{item.icon}</div>
               <div
