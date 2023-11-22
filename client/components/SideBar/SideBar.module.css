@@ -101,10 +101,14 @@
 
 .sidebar .authentication {
   align-items: center;
-  font-size: 28px;
+  font-size: 18px;
   text-align: center;
 }
-
+.sidebar .welcome {
+  align-items: center;
+  font-size: 22px;
+  text-align: center;
+}
 .sidebar .login-button {
   margin-top: 20px;
   align-self: center;

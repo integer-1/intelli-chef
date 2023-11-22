@@ -82,6 +82,7 @@ const SideBar = () => {
         </IfAuthenticated>
 
         <IfNotAuthenticated>
+          <h1 className={styles['welcome']}>Welcome Guest</h1>
           <p
             className={styles['authentication']}
             style={{ display: isOpen ? 'block' : 'none' }}
