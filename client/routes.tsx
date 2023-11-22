@@ -4,7 +4,7 @@ import App from './components/App.tsx'
 import ReviewList from './components/ReviewList.tsx'
 import MyKitchen from './components/MyKitchen.tsx'
 import RecipeCard from './components/RecipeCard.tsx'
-import SavedRecipeCard from './components/SavedViewRecipe/SavedRecipeCard.tsx'
+import SavedRecipeCard from './components/ViewRecipe/SavedRecipeCard.tsx'
 
 export const routes = createRoutesFromElements(
   <>

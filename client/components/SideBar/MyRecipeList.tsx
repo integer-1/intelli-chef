@@ -40,6 +40,7 @@ const MyRecipeList: React.FC<UserProps> = ({ authId }) => {
             <Link
               to={`/SavedRecipeCard/${recipe.id}`}
               className={styles['recipe-link']}
+              state={recipe}
             >
               {recipe.dish_name}
             </Link>
