@@ -3,13 +3,6 @@ import { useQuery } from '@tanstack/react-query'
 import { getAllIngredients } from '../../apis/ingredients'
 import { Ingredient, IngredientData } from '../../../models/ingredients'
 import { useIngredient } from '../../hooks/useIngredient'
-import { closestCenter, DndContext } from '@dnd-kit/core'
-import {
-  arrayMove,
-  SortableContext,
-  useSortable,
-  verticalListSortingStrategy,
-} from '@dnd-kit/sortable'
 
 import styles from './KitchenBuilder.module.css'
 
@@ -81,31 +74,33 @@ approach. - jayde */
   }
 
   return (
-    <div className={styles['kitchen-builder']}>
-      <h2>Kitchen Builder</h2>
-      <input
-        type="text"
-        placeholder="Add ingredient..."
-        value={searchInput}
-        onChange={(e) => setSearchInput(e.target.value)}
-        onKeyDown={handleKeyDown}
-      />
-      <div>
-        <div className={styles['kitchen-box']}>
-          <div className={styles['kitchen-items']}>
-            {selectedIngredients.map((ingredient, index) => (
-              <div className={styles['item-box']} key={index}>
-                {ingredient.item_name}
-                <button onClick={() => handleDeleteFromKitchen(ingredient)}>
-                  <div className={styles['img-wrapper']}>
-                    <img src="/svg/x.svg" alt="delete button"></img>
-                  </div>
-                </button>
-              </div>
-            ))}
-            {searchInput && (
-              <div className={styles['item-box']}>{searchInput}</div>
-            )}
+    <div className={styles['kitchen-builder-wrapper']}>
+      <div className={styles['kitchen-builder']}>
+        <h2>What's in my Kitchen?</h2>
+        <input
+          type="text"
+          placeholder="Add ingredient..."
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
+          onKeyDown={handleKeyDown}
+        />
+        <div>
+          <div className={styles['kitchen-box']}>
+            <div className={styles['kitchen-items']}>
+              {selectedIngredients.map((ingredient, index) => (
+                <div className={styles['item-box']} key={index}>
+                  {ingredient.item_name}
+                  <button onClick={() => handleDeleteFromKitchen(ingredient)}>
+                    <div className={styles['img-wrapper']}>
+                      <img src="/svg/x.svg" alt="delete button"></img>
+                    </div>
+                  </button>
+                </div>
+              ))}
+              {searchInput && (
+                <div className={styles['item-box']}>{searchInput}</div>
+              )}
+            </div>
           </div>
         </div>
       </div>
