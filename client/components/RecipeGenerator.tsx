@@ -29,7 +29,7 @@ function RecipeGenerator() {
       const ingredientsList = ingredients
         .map((ingredient) => ingredient.item_name)
         .join(', ')
-      const prompt = `From now you when you respond you will only provide a codeblock with json and nothing else. You will consider this list of ingredients: ${ingredientsList} and provide a maximum of 3 recipes containing ONLY the ingredients specific and absolutely no additional ingredients. The json will have the following properties: dish_name, preparation_time, cooking_time, servings, ingredients and method. Remember you must provide only a codeblock containing json, absolutely no additional text.`
+      const prompt = `From now you when you respond you will only provide a codeblock with json and nothing else. You will consider this list of ingredients: ${ingredientsList} and provide a maximum of 3 recipes containing ONLY the ingredients specific and absolutely no additional ingredients. The json will have the following properties: dish_name, preparation_time, cooking_time, servings, ingredients and method. Please store each step of method as a string array. Remember you must provide only a codeblock containing json, absolutely no additional text.`
 
       const options = {
         method: 'POST',
@@ -73,7 +73,7 @@ function RecipeGenerator() {
         <ul>
           {recipeList.map((recipe) => (
             <li key={recipe.dish_name}>
-              <Link to="/recipe" state={recipe.dish_name}>
+              <Link to="/recipe" state={recipe}>
                 <strong>{recipe.dish_name}</strong>
               </Link>
               <p>Preparation Time: {recipe.preparation_time}</p>

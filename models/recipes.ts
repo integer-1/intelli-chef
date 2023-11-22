@@ -5,5 +5,5 @@ export interface Recipes {
   cooking_time: string
   servings: number
   ingredients: string[]
-  method: string
+  method: string []
 }
