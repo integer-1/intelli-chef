@@ -1,6 +1,6 @@
 import KitchenBuilder from './KitchenBuilder/KitchenBuilder'
 import RecipeGenerator from './RecipeGenerator'
-import SideBar from './SideBar'
+import SideBar from './SideBar/SideBar'
 
 function App() {
   return (
@@ -8,7 +8,7 @@ function App() {
       <header className="header">
         <h1>IntelliChef</h1>
       </header>
-        <SideBar />
+      <SideBar />
       <section className="main">
         <KitchenBuilder />
         <RecipeGenerator />

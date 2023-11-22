@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { useAuth0 } from '@auth0/auth0-react'
-import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
+import { IfAuthenticated, IfNotAuthenticated } from '../Authenticated.tsx'
 import { NavLink } from 'react-router-dom'
 import MyRecipeList from './MyRecipeList.tsx'
+
+import styles from './SideBar.module.css'
 
 import {
   FridgeIcon,
@@ -10,7 +12,7 @@ import {
   XIcon,
   MenuBar,
   KitchenIcon,
-} from './Icons.tsx'
+} from '../Icons.tsx'
 
 const SideBar = () => {
   const { loginWithRedirect, logout, user } = useAuth0()
@@ -25,12 +27,15 @@ const SideBar = () => {
   ]
 
   return (
-    <div className="sidebar-container">
-      <div style={{ width: isOpen ? '250px' : '60px' }} className="sidebar">
-        <div className="top_section">
+    <div className={styles['sidebar-container']}>
+      <div
+        style={{ width: isOpen ? '250px' : '60px' }}
+        className={styles['sidebar']}
+      >
+        <div className={styles['top_section']}>
           <div
             style={{ marginLeft: isOpen ? '-10px' : '-10px' }}
-            className="bars"
+            className={styles['bars']}
             onClick={isOpen ? closeSidebar : openSidebar}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === 'Space') {
@@ -46,7 +51,7 @@ const SideBar = () => {
 
         <IfAuthenticated>
           <p
-            className="authentication"
+            className={styles['authentication']}
             style={{ display: isOpen ? 'block' : 'none' }}
           >
             {user?.nickname}`s recipe
@@ -56,12 +61,12 @@ const SideBar = () => {
             <NavLink
               to={item.path}
               key={index}
-              className={`link${isOpen ? '' : '-close'}`}
+              className={`$styles[link]} ${isOpen ? '' : styles['-close']}`}
             >
-              <div className="icon">{item.icon}</div>
+              <div className={styles['icon']}>{item.icon}</div>
               <div
                 style={{ display: isOpen ? 'block' : 'none' }}
-                className="link_text"
+                className={styles['link_text']}
               >
                 {item.name}
               </div>
@@ -70,7 +75,7 @@ const SideBar = () => {
           <div style={{ display: isOpen ? 'block' : 'none' }}>
             <MyRecipeList authId={user?.sub || ''} />
 
-            <button className="login-button" onClick={() => logout()}>
+            <button className={styles['login-button']} onClick={() => logout()}>
               Logout
             </button>
           </div>
@@ -78,7 +83,10 @@ const SideBar = () => {
 
         <IfNotAuthenticated>
           <p>Please log in here</p>
-          <button className="login-button" onClick={() => loginWithRedirect()}>
+          <button
+            className={styles['login-button']}
+            onClick={() => loginWithRedirect()}
+          >
             Login
           </button>
         </IfNotAuthenticated>
