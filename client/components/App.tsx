@@ -1,4 +1,4 @@
-import KitchenBuilder from './KitchenBuilder'
+import KitchenBuilder from './KitchenBuilder/KitchenBuilder'
 import RecipeGenerator from './RecipeGenerator'
 import SideBar from './SideBar'
 
