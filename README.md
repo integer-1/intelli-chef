@@ -20,14 +20,23 @@ Explain the basic steps to run and use the project.
     npm i
     npm run dev
     ```
+  </details>
 
+- 
+  <details style="padding-left: 2em">
+    <summary>Tip</summary>
+
+    You should have Knex.js installed as a dependency
+    ```sh
+    npm install knex
+    ```
+
+    Make sure the database schema is up to date with the latest changes.
     ```sh
     npm run knex migrate:latest
     npm run knex seed:run
     ```
   </details>
-
-
 
 ---
 
