@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
 :root {
   --tahuna-sands: #fff0ce;
   --olivine: #80bb77;
@@ -10,7 +12,7 @@ body {
   top: 0;
   left: 0;
   margin: 0;
-  padding: 20px;
+  padding: 0px;
   text-decoration: none;
   font: 14px Neucha, Helvetica, Arial, sans-serif;
 }
