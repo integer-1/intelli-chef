@@ -11,7 +11,7 @@ export const routes = createRoutesFromElements(
     <Route path="/" element={<App />} />
     <Route path="/RecommendedRecipes" element={<ReviewList />} />
     <Route path="/MyKitchen" element={<MyKitchen />} />
-    <Route path="/RecipeCard" element={<RecipeCard />} />
+    <Route path="/recipe" element={<RecipeCard />} />
     <Route path="/SavedRecipeCard/:id" element={<SavedRecipeCard />} />
   </>
 )
