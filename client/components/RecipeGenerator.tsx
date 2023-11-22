@@ -1,25 +1,12 @@
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { Link, Routes, Route, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { getAllIngredients } from '../apis/ingredients'
 
 import { Recipes } from '../../models/recipes'
 
-interface Message {
-  role: string
-  content: string
-}
-
-const initialMessage: Message = {
-  role: 'chatGPT',
-  content: '',
-}
-
 function RecipeGenerator() {
-  const [outputMessage, setOutputMessage] = useState<Message>(initialMessage)
   const [recipeList, setRecipeList] = useState<Recipes[]>([])
-
-  const navigate = useNavigate()
 
   const {
     data: ingredients,
@@ -75,11 +62,6 @@ function RecipeGenerator() {
     } catch (error) {
       console.error(error)
     }
-  }
-
-  const navigateRecipe = () => {
-    // 👇️ navigate to /
-    navigate('/recipe')
   }
 
   return (
