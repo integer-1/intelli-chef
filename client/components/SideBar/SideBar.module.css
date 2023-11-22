@@ -1,10 +1,5 @@
 /* Side Bar */
 
-/* --tahuna-sands: #fff0ce;
---olivine: #80bb77;
---calico: #dcc184;
---royal-health: #b43969;
---bleached-cedar: #261b32; */
 .sidebar-container {
   display: flex;
   position: fixed;
