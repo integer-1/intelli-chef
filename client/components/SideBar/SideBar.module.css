@@ -48,8 +48,8 @@
   margin-left: 50px;
 }
 
-.sidebar .link,
-.sidebar .link-close {
+.sidebar .recipe-link,
+.sidebar .recipe-link-close {
   display: flex;
   color: black;
   padding: 15px 10px;

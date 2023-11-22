@@ -38,7 +38,7 @@ const MyRecipeList: React.FC<UserProps> = ({ authId }) => {
           <li key={recipe.id}>
             <ChefIcon />
             <Link
-              to={`/RecipeCard/${recipe.id}`}
+              to={`/SavedRecipeCard/${recipe.id}`}
               className={styles['recipe-link']}
             >
               {recipe.dish_name}
