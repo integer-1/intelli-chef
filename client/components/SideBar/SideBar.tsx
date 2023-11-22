@@ -50,12 +50,12 @@ const SideBar = () => {
         </div>
 
         <IfAuthenticated>
-          <p
+          <h1
             className={styles['authentication']}
             style={{ display: isOpen ? 'block' : 'none' }}
           >
             {user?.nickname}`s recipes
-          </p>
+          </h1>
 
           {menuItem.map((item, index) => (
             <NavLink
