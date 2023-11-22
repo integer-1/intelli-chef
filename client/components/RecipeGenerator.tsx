@@ -91,7 +91,7 @@ function RecipeGenerator() {
         <ul>
           {recipeList.map((recipe) => (
             <li key={recipe.dish_name}>
-              <Link to={`/recipe`} state={recipe.dish_name}>
+              <Link to="/recipe" state={recipe.dish_name}>
                 <strong>{recipe.dish_name}</strong>
               </Link>
               <p>Preparation Time: {recipe.preparation_time}</p>

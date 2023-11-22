@@ -7,13 +7,7 @@ const RecipeCard = (props: any) => {
   return (
     <div>
       <h1>Recipe</h1>
-      <h2>Dish: {state.dish_name}</h2>
-      {/* <p>{state.method}</p>
-      <p>{state.ingredients}</p>
-      <p>{state.preparation_timed}</p>
-      <p>{state.cooking_time}</p>
-      <p>{state.servings}</p>
-      <p>{state.method}</p> */}
+      <h1>Dish:{state}</h1>
     </div>
   )
 }
