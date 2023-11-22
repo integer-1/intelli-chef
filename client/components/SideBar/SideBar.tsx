@@ -82,7 +82,12 @@ const SideBar = () => {
         </IfAuthenticated>
 
         <IfNotAuthenticated>
-          <p>Please log in here</p>
+          <p
+            className={styles['authentication']}
+            style={{ display: isOpen ? 'block' : 'none' }}
+          >
+            Please log in here
+          </p>
           <button
             className={styles['login-button']}
             onClick={() => loginWithRedirect()}
