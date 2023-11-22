@@ -77,13 +77,15 @@ approach. - jayde */
     <div className={styles['kitchen-builder-wrapper']}>
       <div className={styles['kitchen-builder']}>
         <h2>What&apos;s in my Kitchen?</h2>
+        <label htmlFor="ingredientInput">::</label>
         <input
           type="text"
+          id="ingredientInput"
           placeholder="Add ingredient..."
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
           onKeyDown={handleKeyDown}
-        />
+          />
         <div>
           <div className={styles['kitchen-box']}>
             <div className={styles['kitchen-items']}>

@@ -50,18 +50,18 @@ const SideBar = () => {
         </div>
 
         <IfAuthenticated>
-          <p
+          <h1
             className={styles['authentication']}
             style={{ display: isOpen ? 'block' : 'none' }}
           >
             {user?.nickname}`s recipes
-          </p>
+          </h1>
 
           {menuItem.map((item, index) => (
             <NavLink
               to={item.path}
               key={index}
-              className={`$styles[link]} ${isOpen ? '' : styles['-close']}`}
+              className={styles[`link${isOpen ? '' : '-close'}`]}
             >
               <div className={styles['icon']}>{item.icon}</div>
               <div
@@ -82,7 +82,13 @@ const SideBar = () => {
         </IfAuthenticated>
 
         <IfNotAuthenticated>
-          <p>Please log in here</p>
+          <h1 className={styles['welcome']}>Welcome Guest</h1>
+          <p
+            className={styles['authentication']}
+            style={{ display: isOpen ? 'block' : 'none' }}
+          >
+            Please log in here
+          </p>
           <button
             className={styles['login-button']}
             onClick={() => loginWithRedirect()}
