@@ -54,7 +54,7 @@ const SideBar = () => {
             className={styles['authentication']}
             style={{ display: isOpen ? 'block' : 'none' }}
           >
-            {user?.nickname}`s recipe
+            {user?.nickname}`s recipes
           </p>
 
           {menuItem.map((item, index) => (
