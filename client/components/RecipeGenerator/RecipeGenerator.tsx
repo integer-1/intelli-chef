@@ -1,12 +1,19 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { getAllIngredients } from '../../apis/ingredients'
 import styles from './RecipeGenerator.module.css'
 import { Recipes } from '../../../models/recipes'
 
 function RecipeGenerator() {
-  const [recipeList, setRecipeList] = useState<Recipes[]>([])
+  const { state } = useLocation()
+  const [recipeList, setRecipeList] = useState<Recipes[]>()
+
+  useEffect(() => {
+    if (state) {
+      setRecipeList(state)
+    }
+  }, [state])
 
   const {
     data: ingredients,
@@ -81,16 +88,23 @@ function RecipeGenerator() {
       <div>
         <strong>Chat GPT : </strong>
         <ul>
-          {recipeList.map((recipe) => (
-            <li key={recipe.dish_name}>
-              <Link to={`/recipe`} state={recipe}>
-                <strong>{recipe.dish_name}</strong>
-              </Link>
-              <p>Preparation Time: {recipe.preparation_time}</p>
-              <p>Ingredients: {recipe.ingredients}</p>
-              <hr />
-            </li>
-          ))}
+          {recipeList && recipeList.length > 0 ? (
+            recipeList.map((recipe) => (
+              <li key={recipe.dish_name}>
+                <Link
+                  to={`/recipe`}
+                  state={{ recipeList, selectedRecipe: recipe }}
+                >
+                  <strong>{recipe.dish_name}</strong>
+                </Link>
+                <p>Preparation Time: {recipe.preparation_time}</p>
+                <p>Ingredients: {recipe.ingredients}</p>
+                <hr />
+              </li>
+            ))
+          ) : (
+            <p>No recipes available.</p>
+          )}
         </ul>
       </div>
     </div>

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useAuth0 } from '@auth0/auth0-react'
 import { IfAuthenticated, IfNotAuthenticated } from '../Authenticated.tsx'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, Link } from 'react-router-dom'
 import RecipeViewer from '../ViewRecipe/RecipeViewer'
 import SideBar from '../SideBar/SideBar'
 import Header from '../Header/Header'
@@ -14,6 +14,7 @@ import { getRecipes } from '../../apis/recipes.ts'
 const RecipeCard = () => {
   const { user } = useAuth0()
   const { state } = useLocation()
+  const { recipeList, selectedRecipe } = state
   const navigate = useNavigate()
   const { addRecipeMutation } = useRecipe()
 
@@ -49,7 +50,6 @@ const RecipeCard = () => {
     method: state.method,
     auth0_id: auth0Id || '',
   }
-  console.log('newRecipe' + newRecipe)
 
   const handleSave = () => {
     addRecipeMutation.mutate(newRecipe, {
@@ -76,7 +76,10 @@ const RecipeCard = () => {
       <IfNotAuthenticated>
         <p>You can save this recipe after login </p>
       </IfNotAuthenticated>
-      <RecipeViewer recipe={state} />
+      <Link to={`/`} state={recipeList}>
+        <button>Home</button>
+      </Link>
+      <RecipeViewer recipe={selectedRecipe} />
     </div>
   )
 }
