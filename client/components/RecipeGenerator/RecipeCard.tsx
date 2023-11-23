@@ -3,8 +3,6 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { IfAuthenticated, IfNotAuthenticated } from '../Authenticated.tsx'
 import { useLocation, useNavigate, Link } from 'react-router-dom'
 import RecipeViewer from '../ViewRecipe/RecipeViewer'
-import SideBar from '../SideBar/SideBar'
-import Header from '../Header/Header'
 import { useRecipe } from '../../hooks/useRecipe.ts'
 import styles from './RecipeGenerator.module.css'
 import { RecipeData } from '../../../models/recipes.ts'
@@ -39,20 +37,20 @@ const RecipeCard = () => {
 
   return (
     <div>
-      <Header />
-      <SideBar />
       <h1>Recipe for {user?.nickname}</h1>
-      <IfAuthenticated>
-        <button className={styles['button']} onClick={() => handleSave()}>
-          Save
-        </button>
-      </IfAuthenticated>
-      <IfNotAuthenticated>
-        <p>You can save this recipe after login </p>
-      </IfNotAuthenticated>
-      <Link to={`/`} state={recipeList}>
-        <button>Home</button>
-      </Link>
+      <div className={styles['recipe-nav']}>
+        <IfAuthenticated>
+          <button className={styles['button']} onClick={() => handleSave()}>
+            Save
+          </button>
+        </IfAuthenticated>
+        <IfNotAuthenticated>
+          <p>You can save this recipe after login </p>
+        </IfNotAuthenticated>
+        <Link to={`/`} state={recipeList}>
+          <button className={styles['button']}>Back to View Recipes</button>
+        </Link>
+      </div>
       <RecipeViewer recipe={selectedRecipe} />
     </div>
   )

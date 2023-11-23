@@ -1,6 +1,7 @@
 /* /SavedRecipeCard/:id */
 .recipe-container {
-  margin: 3% 30% 3% 3%;
+  max-width: 100%;
+  margin: 10px;
   background-color: white;
   background-image: none;
   background-position: 0 90%;
@@ -28,6 +29,7 @@
 .recipe {
   padding: 1.2em;
 }
+
 
 .dish-name {
   font-size: 25px;
