@@ -6,9 +6,11 @@ import styles from './RecipeGenerator.module.css'
 import { Recipes } from '../../../models/recipes'
 
 function RecipeGenerator() {
+  //state of recipeList is passed to/from RecipeCard to provide go-back functionality
   const { state } = useLocation()
   const [recipeList, setRecipeList] = useState<Recipes[]>()
 
+  //set initial recipeList if returning from recipe view
   useEffect(() => {
     if (state) {
       setRecipeList(state)
@@ -22,7 +24,6 @@ function RecipeGenerator() {
   } = useQuery(['ingredients'], getAllIngredients)
 
   const fetchData = async () => {
-    console.log('data loaded')
     try {
       if (isLoading) {
         return <p>Loading...</p>
@@ -80,13 +81,15 @@ function RecipeGenerator() {
   }
 
   return (
-    <div style={{ margin: '20px' }}>
-      <h2>Recipe Generator</h2>
-      <button onClick={fetchData} className={styles['button']}>
-        Generate Recipes
-      </button>
+    <div className={styles['recipe-gen']}>
+      <div className={styles.header}>
+        <h2>Recipe Generator</h2>
+        <button onClick={fetchData} className={styles['button']}>
+          Generate Recipes
+        </button>
+      </div>
       <div>
-        <strong>Chat GPT : </strong>
+        <h3>Chat GPT : </h3>
         <ul>
           {recipeList && recipeList.length > 0 ? (
             recipeList.map((recipe) => (
@@ -103,7 +106,7 @@ function RecipeGenerator() {
               </li>
             ))
           ) : (
-            <p>No recipes available.</p>
+            <p>Ready to generate recipes!</p>
           )}
         </ul>
       </div>

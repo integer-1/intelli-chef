@@ -9,8 +9,10 @@ function App() {
       <Header />
       <SideBar />
       <section className="main">
-        <KitchenBuilder />
-        <RecipeGenerator />
+        <div>
+          <KitchenBuilder />
+          <RecipeGenerator />
+        </div>
       </section>
     </>
   )

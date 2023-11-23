@@ -16,3 +16,15 @@ body {
   text-decoration: none;
   font: 14px Neucha, Helvetica, Arial, sans-serif;
 }
+
+h2{
+  font-family: 'Itim';
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
+.main{
+  display: flex;
+  justify-content: center;
+  margin-left: -100px;
+}
