@@ -6,6 +6,7 @@ import RecipeViewer from '../ViewRecipe/RecipeViewer'
 import { useRecipe } from '../../hooks/useRecipe.ts'
 import styles from './RecipeGenerator.module.css'
 import { RecipeData } from '../../../models/recipes.ts'
+import ErrorMessage from '../Error/ErrorMessage.tsx'
 
 const RecipeCard = () => {
   const { user } = useAuth0()
@@ -27,12 +28,21 @@ const RecipeCard = () => {
   }
 
   const handleSave = () => {
-    addRecipeMutation.mutate(newRecipe, {
-      onSuccess: () => {
-        navigate('/')
-        window.location.reload()
-      },
-    })
+    try {
+      addRecipeMutation.mutate(newRecipe, {
+        onSuccess: () => {
+          navigate('/')
+          window.location.reload()
+        },
+      })
+    } catch (error) {
+      const message = `Sorry, We can't save your recipe`
+      return (
+        <>
+          <ErrorMessage message={message} />
+        </>
+      )
+    }
   }
 
   return (

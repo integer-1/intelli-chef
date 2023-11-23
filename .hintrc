@@ -17,6 +17,12 @@
       {
         "aria-command-name": "off"
       }
+    ],
+    "axe/structure": [
+      "default",
+      {
+        "list": "off"
+      }
     ]
   }
 }

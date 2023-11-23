@@ -8,19 +8,16 @@ router.get('/', async (req, res) => {
     const recipes = await db.getAllRecipes()
     res.json({ recipes })
   } catch (error) {
-    console.log(error)
     res.status(500).json({ message: 'Cannot get recipes' })
   }
 })
 
 router.get('/:id', async (req, res) => {
-  const id = req.params.id
+  const id = Number(req.params.id)
   try {
-    const recipeId = parseInt(id, 10)
-    const recipe = await db.getRecipesByID(recipeId)
+    const recipe = await db.getRecipesByID(id)
     res.json({ recipe })
   } catch (error) {
-    console.log(error)
     res.status(500).json({ message: 'Something went wrong' })
   }
 })
