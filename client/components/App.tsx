@@ -1,5 +1,5 @@
 import KitchenBuilder from './KitchenBuilder/KitchenBuilder'
-import RecipeGenerator from './RecipeGenerator'
+import RecipeGenerator from './RecipeGenerator/RecipeGenerator'
 import SideBar from './SideBar/SideBar'
 import Header from './Header/Header'
 

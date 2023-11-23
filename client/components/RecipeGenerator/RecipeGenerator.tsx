@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { Link } from 'react-router-dom'
-import { getAllIngredients } from '../apis/ingredients'
+import { Link, useNavigate } from 'react-router-dom'
+import { getAllIngredients } from '../../apis/ingredients'
 
-import { Recipes } from '../../models/recipes'
+import { Recipes } from '../../../models/recipes'
 
 function RecipeGenerator() {
   const [recipeList, setRecipeList] = useState<Recipes[]>([])
+  const navigate = useNavigate()
 
   const {
     data: ingredients,
@@ -54,6 +55,14 @@ function RecipeGenerator() {
         const stringValue1: string = data.choices[0].message['content']
         const refinedData = stringValue1.replace(/\\|\n|`|json|/g, '')
         const jsonArray = JSON.parse(refinedData)
+        for (let i = 0; i < jsonArray.length; i++) {
+          jsonArray[i].ingredients = Array.isArray(jsonArray[i].ingredients)
+            ? jsonArray[i].ingredients.join(', ')
+            : String(jsonArray[i].ingredients)
+          jsonArray[i].method = Array.isArray(jsonArray[i].method)
+            ? jsonArray[i].method.join('\n')
+            : String(jsonArray[i].method)
+        }
         console.log(jsonArray)
         setRecipeList(jsonArray)
       } else {
@@ -62,6 +71,10 @@ function RecipeGenerator() {
     } catch (error) {
       console.error(error)
     }
+  }
+
+  const handleRecipeClick = (recipe: Recipes) => {
+    navigate('/recipe', { state: { recipeList, selectedRecipe: recipe } })
   }
 
   return (
@@ -73,11 +86,11 @@ function RecipeGenerator() {
         <ul>
           {recipeList.map((recipe) => (
             <li key={recipe.dish_name}>
-              <Link to="/recipe" state={recipe}>
+              <span onClick={() => handleRecipeClick(recipe)}>
                 <strong>{recipe.dish_name}</strong>
-              </Link>
+              </span>
               <p>Preparation Time: {recipe.preparation_time}</p>
-              <p>Ingredients: {recipe.ingredients.join(', ')}</p>
+              <p>Ingredients: {recipe.ingredients}</p>
               <hr />
             </li>
           ))}

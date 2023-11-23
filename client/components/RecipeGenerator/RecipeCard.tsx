@@ -1,21 +1,30 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react'
+import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
 const RecipeCard = () => {
   const { state } = useLocation()
+  const [recipe, setRecipe] = useState(state)
+
+  useEffect(() => {
+    setRecipe(state)
+  }, [state])
+
+  if (!recipe) {
+    return <p>No recipe!</p>
+  }
 
   return (
     <div>
       <h1>Recipe</h1>
       <h1>{state.dish_name}</h1>
       <p>Preparation Time: {state.preparation_time}</p>
-      <p>Ingredients: {state.ingredients.join(', ')}</p>
+      <p>Ingredients: {state.ingredients}</p>
       <p>Cooking time: {state.cooking_time}</p>
       <p>Preparing time: {state.servings}</p>
       <p>
-        Method:
-        <ol>
+        Method: {state.method}
+        {/* <ol>
           {state.method.map(
             (
               step:
@@ -35,7 +44,7 @@ const RecipeCard = () => {
               <li key={index}>{step}</li>
             )
           )}
-        </ol>
+        </ol> */}
       </p>
     </div>
   )

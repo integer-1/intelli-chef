@@ -4,7 +4,7 @@ export interface Recipes {
   preparation_time: string
   cooking_time: string
   servings: number
-  ingredients: string[]
-  method: string []
+  ingredients: string
+  method: string
   auth0_id: string
 }

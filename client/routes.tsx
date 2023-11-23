@@ -3,7 +3,7 @@ import { Route, createRoutesFromElements } from 'react-router-dom'
 import App from './components/App.tsx'
 import ReviewList from './components/ReviewList.tsx'
 import MyKitchen from './components/MyKitchen.tsx'
-import RecipeCard from './components/RecipeCard.tsx'
+import RecipeCard from './components/RecipeGenerator/RecipeCard.tsx'
 import SavedRecipeCard from './components/ViewRecipe/SavedRecipeCard.tsx'
 
 export const routes = createRoutesFromElements(
