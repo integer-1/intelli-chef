@@ -5,6 +5,7 @@ import ReviewList from './components/ReviewList.tsx'
 import MyKitchen from './components/MyKitchen.tsx'
 import RecipeCard from './components/RecipeGenerator/RecipeCard.tsx'
 import SavedRecipeCard from './components/ViewRecipe/SavedRecipeCard.tsx'
+import RecipeGenerator from './components/RecipeGenerator/RecipeGenerator.tsx'
 
 export const routes = createRoutesFromElements(
   <>
@@ -12,6 +13,7 @@ export const routes = createRoutesFromElements(
     <Route path="/RecommendedRecipes" element={<ReviewList />} />
     <Route path="/MyKitchen" element={<MyKitchen />} />
     <Route path="/recipe" element={<RecipeCard />} />
+    <Route path="/" element={<RecipeGenerator />} />
     <Route path="/SavedRecipeCard/:id" element={<SavedRecipeCard />} />
   </>
 )

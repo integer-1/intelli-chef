@@ -1,5 +1,5 @@
 import request from 'superagent'
-import { Recipes } from '../../models/recipes'
+import { RecipeData, Recipes } from '../../models/recipes'
 
 const rootUrl = '/api/v1'
 
@@ -27,6 +27,6 @@ export async function deleteRecipe(id: number): Promise<void> {
   await request.delete(rootUrl + `/recipes/${id}`)
 }
 
-export async function addRecipe(newRecipe: Recipes): Promise<void> {
+export async function addRecipe(newRecipe: RecipeData): Promise<void> {
   await request.post(rootUrl + '/recipes').send({ ...newRecipe })
 }

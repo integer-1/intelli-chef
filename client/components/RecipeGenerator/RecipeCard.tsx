@@ -7,9 +7,7 @@ import SideBar from '../SideBar/SideBar'
 import Header from '../Header/Header'
 import { useRecipe } from '../../hooks/useRecipe.ts'
 import styles from './RecipeGenerator.module.css'
-import { Recipes } from '../../../models/recipes.ts'
-import { useQuery } from '@tanstack/react-query'
-import { getRecipes } from '../../apis/recipes.ts'
+import { RecipeData } from '../../../models/recipes.ts'
 
 const RecipeCard = () => {
   const { user } = useAuth0()
@@ -19,35 +17,14 @@ const RecipeCard = () => {
   const { addRecipeMutation } = useRecipe()
 
   const auth0Id = user?.sub
-  console.log('state' + state)
-  const {
-    data: allRecipes,
-    isError,
-    isLoading,
-  } = useQuery(['allRecipes'], getRecipes)
 
-  if (isError) {
-    return (
-      <>
-        <p>Something went wrong!</p>
-      </>
-    )
-  }
-
-  if (!allRecipes || isLoading) {
-    return <p>...loading</p>
-  }
-  const lastRecipeId = allRecipes[allRecipes.length - 1]?.id || 0
-  const newId = lastRecipeId + 1
-
-  const newRecipe: Recipes = {
-    id: newId,
-    dish_name: state.dish_name,
-    preparation_time: state.preparation_time,
-    cooking_time: state.cooking_time,
-    servings: state.servings,
-    ingredients: state.ingredients,
-    method: state.method,
+  const newRecipe: RecipeData = {
+    dish_name: selectedRecipe.dish_name,
+    preparation_time: selectedRecipe.preparation_time,
+    cooking_time: selectedRecipe.cooking_time,
+    servings: selectedRecipe.servings,
+    ingredients: selectedRecipe.ingredients,
+    method: selectedRecipe.method,
     auth0_id: auth0Id || '',
   }
 
@@ -66,12 +43,9 @@ const RecipeCard = () => {
       <SideBar />
       <h1>Recipe for {user?.nickname}</h1>
       <IfAuthenticated>
-          <button
-            className={styles['button']}
-            onClick={() => handleSave()}
-          >
-            Save
-          </button>
+        <button className={styles['button']} onClick={() => handleSave()}>
+          Save
+        </button>
       </IfAuthenticated>
       <IfNotAuthenticated>
         <p>You can save this recipe after login </p>

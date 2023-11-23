@@ -1,5 +1,5 @@
 import connection from './connection'
-import { Recipes } from '../../models/recipes'
+import { RecipeData, Recipes } from '../../models/recipes'
 
 export async function getAllRecipes(db = connection): Promise<Recipes[]> {
   return db('recipes').select('*')
@@ -38,7 +38,7 @@ export async function deleteRecipe(id: number, db = connection): Promise<void> {
 }
 
 export async function addRecipe(
-  recipe: Recipes,
+  recipe: RecipeData,
   db = connection
 ): Promise<Recipes> {
   return db('recipes')
@@ -55,3 +55,4 @@ export async function addRecipe(
       'auth0_id',
     ])
 }
+

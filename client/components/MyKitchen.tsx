@@ -1,7 +1,14 @@
+import Header from './Header/Header'
+import KitchenBuilder from './KitchenBuilder/KitchenBuilder'
+import SideBar from './SideBar/SideBar'
 
 const MyKitchen = () => {
   return (
-    <div>MyKitchen</div>
+    <div>
+      <Header />
+      <SideBar />
+      <KitchenBuilder />
+    </div>
   )
 }
 
