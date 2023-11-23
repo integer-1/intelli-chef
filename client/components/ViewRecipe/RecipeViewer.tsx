@@ -1,6 +1,5 @@
 import styles from './SavedRecipeCard.module.css'
 
-
 interface RecipeProps {
   recipe: {
     id: number
@@ -15,8 +14,6 @@ interface RecipeProps {
 }
 
 const SavedRecipeCard: React.FC<RecipeProps> = (recipe) => {
-
-  console.log(recipe.recipe)
   const methodSteps: string[] = recipe.recipe.method
     .split('\n')
     .map((step: string) => step.trim())

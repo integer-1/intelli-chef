@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { Link, useLocation } from 'react-router-dom'
 import { getAllIngredients } from '../../apis/ingredients'
-
+import styles from './RecipeGenerator.module.css'
 import { Recipes } from '../../../models/recipes'
 
 function RecipeGenerator() {
@@ -80,9 +80,11 @@ function RecipeGenerator() {
   }
 
   return (
-    <div>
+    <div style={{ margin: '20px' }}>
       <h2>Recipe Generator</h2>
-      <button onClick={fetchData}>Generate Recipes</button>
+      <button onClick={fetchData} className={styles['button']}>
+        Generate Recipes
+      </button>
       <div>
         <strong>Chat GPT : </strong>
         <ul>
