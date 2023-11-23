@@ -1,8 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useRecipe } from '../../hooks/useRecipe'
-import styles from './SavedRecipeCard.module.css'
-import SideBar from '../SideBar/SideBar'
-import Header from '../Header/Header'
+import styles from './RecipeViewer.module.css'
 import RecipeViewer from './RecipeViewer'
 
 const SavedRecipeCard = () => {
@@ -17,15 +15,14 @@ const SavedRecipeCard = () => {
   }
 
   return (
-    <>
-      <Header />
-      <SideBar />
+    <div>
       <RecipeViewer recipe={state} />
-      <div className={styles['button-container']}>
-        <button onClick={() => handleDelete(state.id)}>Delete</button>
+      <div className={styles['recipe-nav']}>
+        <div className={styles['button-container']}>
+          <button onClick={() => handleDelete(state.id)}>Delete</button>
+        </div>
       </div>
-      <div style={{height : '3rem'}}></div>
-    </>
+    </div>
   )
 }
 

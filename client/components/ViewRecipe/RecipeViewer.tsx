@@ -1,4 +1,4 @@
-import styles from './SavedRecipeCard.module.css'
+import styles from './RecipeViewer.module.css'
 
 interface RecipeProps {
   recipe: {
