@@ -1,13 +1,12 @@
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { getAllIngredients } from '../../apis/ingredients'
 
 import { Recipes } from '../../../models/recipes'
 
 function RecipeGenerator() {
   const [recipeList, setRecipeList] = useState<Recipes[]>([])
-  const navigate = useNavigate()
 
   const {
     data: ingredients,
@@ -73,10 +72,6 @@ function RecipeGenerator() {
     }
   }
 
-  const handleRecipeClick = (recipe: Recipes) => {
-    navigate('/recipe', { state: { recipeList, selectedRecipe: recipe } })
-  }
-
   return (
     <div>
       <h2>Recipe Generator</h2>
@@ -86,9 +81,9 @@ function RecipeGenerator() {
         <ul>
           {recipeList.map((recipe) => (
             <li key={recipe.dish_name}>
-              <span onClick={() => handleRecipeClick(recipe)}>
+              <Link to={`/recipe`} state={recipe}>
                 <strong>{recipe.dish_name}</strong>
-              </span>
+              </Link>
               <p>Preparation Time: {recipe.preparation_time}</p>
               <p>Ingredients: {recipe.ingredients}</p>
               <hr />

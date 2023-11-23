@@ -1,51 +1,44 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useAuth0 } from '@auth0/auth0-react'
+import { IfAuthenticated, IfNotAuthenticated } from '../Authenticated.tsx'
+import { useLocation, useNavigate } from 'react-router-dom'
+import RecipeViewer from '../ViewRecipe/RecipeViewer'
+import SideBar from '../SideBar/SideBar'
+import Header from '../Header/Header'
+import { useRecipe } from '../../hooks/useRecipe.ts'
 
 const RecipeCard = () => {
+  const { user } = useAuth0()
   const { state } = useLocation()
-  const [recipe, setRecipe] = useState(state)
+  const navigate = useNavigate()
 
-  useEffect(() => {
-    setRecipe(state)
-  }, [state])
+  const auth0Id = user?.sub
 
-  if (!recipe) {
-    return <p>No recipe!</p>
-  }
+  
 
+  const { addRecipeMutation } = useRecipe()
+
+  // const handleSave = (id: number) => {
+  //   addRecipeMutation.mutate()
+  //   navigate('/')
+  //   window.location.reload()
+  // }
+
+  
   return (
     <div>
-      <h1>Recipe</h1>
-      <h1>{state.dish_name}</h1>
-      <p>Preparation Time: {state.preparation_time}</p>
-      <p>Ingredients: {state.ingredients}</p>
-      <p>Cooking time: {state.cooking_time}</p>
-      <p>Preparing time: {state.servings}</p>
-      <p>
-        Method: {state.method}
-        {/* <ol>
-          {state.method.map(
-            (
-              step:
-                | string
-                | number
-                | boolean
-                | React.ReactElement<
-                    any,
-                    string | React.JSXElementConstructor<any>
-                  >
-                | Iterable<React.ReactNode>
-                | React.ReactPortal
-                | null
-                | undefined,
-              index: React.Key | null | undefined
-            ) => (
-              <li key={index}>{step}</li>
-            )
-          )}
-        </ol> */}
-      </p>
+      <Header />
+      <SideBar />
+      <h1>Recipe for {user?.nickname}</h1>
+      <IfAuthenticated>
+      {/* <div className={styles['button-container']}>
+        <button onClick={() => handleSave(state.id)}>Save</button>
+      </div> */}
+      </IfAuthenticated>
+      <IfNotAuthenticated>
+        <p>You can save this recipe after login </p>
+      </IfNotAuthenticated>
+      <RecipeViewer recipe={state} />
     </div>
   )
 }
