@@ -74,35 +74,33 @@ approach. - jayde */
   }
 
   return (
-    <div className={styles['kitchen-builder-wrapper']}>
-      <div className={styles['kitchen-builder']}>
-        <h2>What&apos;s in my Kitchen?</h2>
-        <label htmlFor="ingredientInput">::</label>
-        <input
-          type="text"
-          id="ingredientInput"
-          placeholder="Add ingredient..."
-          value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)}
-          onKeyDown={handleKeyDown}
-          />
-        <div>
-          <div className={styles['kitchen-box']}>
-            <div className={styles['kitchen-items']}>
-              {selectedIngredients.map((ingredient, index) => (
-                <div className={styles['item-box']} key={index}>
-                  {ingredient.item_name}
-                  <button onClick={() => handleDeleteFromKitchen(ingredient)}>
-                    <div className={styles['img-wrapper']}>
-                      <img src="/svg/x.svg" alt="delete button"></img>
-                    </div>
-                  </button>
-                </div>
-              ))}
-              {searchInput && (
-                <div className={styles['item-box']}>{searchInput}</div>
-              )}
-            </div>
+    <div className={styles['kitchen-builder']}>
+      <h2>What&apos;s in your kitchen?</h2>
+      <label htmlFor="ingredientInput">::</label>
+      <input
+        type="text"
+        id="ingredientInput"
+        placeholder="Add ingredient..."
+        value={searchInput}
+        onChange={(e) => setSearchInput(e.target.value)}
+        onKeyDown={handleKeyDown}
+      />
+      <div>
+        <div className={styles['kitchen-box']}>
+          <div className={styles['kitchen-items']}>
+            {selectedIngredients.map((ingredient, index) => (
+              <div className={styles['item-box']} key={index}>
+                {ingredient.item_name}
+                <button onClick={() => handleDeleteFromKitchen(ingredient)}>
+                  <div className={styles['img-wrapper']}>
+                    <img src="/svg/x.svg" alt="delete button"></img>
+                  </div>
+                </button>
+              </div>
+            ))}
+            {searchInput && (
+              <div className={styles['item-box']}>{searchInput}</div>
+            )}
           </div>
         </div>
       </div>
