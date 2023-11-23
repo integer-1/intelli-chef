@@ -47,7 +47,7 @@ server.post('/completions', async (req, res) => {
     console.log('OpenAI API Response:', data)
     res.send(data)
   } catch (error) {
-    console.error(error)
+    res.status(500).json({ message: 'Error communicating with OpenAI API' })
   }
 })
 

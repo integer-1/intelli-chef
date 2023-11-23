@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { getAllIngredients } from '../../apis/ingredients'
 import styles from './RecipeGenerator.module.css'
 import { Recipes } from '../../../models/recipes'
+import ErrorMessage from '../Error/ErrorMessage'
 
 function RecipeGenerator() {
   //state of recipeList is passed to/from RecipeCard to provide go-back functionality
@@ -30,8 +31,12 @@ function RecipeGenerator() {
       }
 
       if (isError) {
-        console.log('No data loaded')
-        return <p>Error retrieving data!</p>
+        const message = `Error retrieving data!`
+        return (
+          <>
+            <ErrorMessage message={message} />
+          </>
+        )
       }
 
       const ingredientsList = ingredients
@@ -58,7 +63,6 @@ function RecipeGenerator() {
       const data = await response.json()
 
       if (data.choices && data.choices.length > 0) {
-        console.log('data received and now being processed....')
         const stringValue1: string = data.choices[0].message['content']
         const refinedData = stringValue1.replace(/\\|\n|`|json|/g, '')
         const jsonArray = JSON.parse(refinedData)
@@ -70,13 +74,22 @@ function RecipeGenerator() {
             ? jsonArray[i].method.join('\n')
             : String(jsonArray[i].method)
         }
-        console.log(jsonArray)
         setRecipeList(jsonArray)
       } else {
-        console.error('No choices found in the response.')
+        const message = `'No choices found in the response.`
+        return (
+          <>
+            <ErrorMessage message={message} />
+          </>
+        )
       }
     } catch (error) {
-      console.error(error)
+      const message = `Currently, our chef is on sick leave. Sorry.`
+      return (
+        <>
+          <ErrorMessage message={message} />
+        </>
+      )
     }
   }
 

@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/:id', async (req, res) => {
-  const id = parseInt(req.params.id)
+  const id = Number(req.params.id)
   try {
     const ingredient = await db.getIngredientById(id)
     res.json({ ingredient })

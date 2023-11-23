@@ -5,6 +5,7 @@ import { Ingredient, IngredientData } from '../../../models/ingredients'
 import { useIngredient } from '../../hooks/useIngredient'
 
 import styles from './KitchenBuilder.module.css'
+import ErrorMessage from '../Error/ErrorMessage'
 
 function KitchenBuilder() {
   const {
@@ -44,7 +45,12 @@ approach. - jayde */
         const updatedIngredients = await getAllIngredients()
         setSelectedIngredients([...updatedIngredients])
       } catch (e) {
-        console.error('Error adding ingredient:', e)
+        const message = `Error adding ingredient: ${e}`
+        return (
+          <>
+            <ErrorMessage message={message} />
+          </>
+        )
       }
     }
   }
@@ -61,7 +67,12 @@ approach. - jayde */
       const updatedIngredients = await getAllIngredients()
       setSelectedIngredients([...updatedIngredients])
     } catch (error) {
-      console.error('Error deleting ingredient:', error)
+      const message = `Error deleting ingredient: ${error}`
+      return (
+        <>
+          <ErrorMessage message={message} />
+        </>
+      )
     }
   }
 
@@ -70,7 +81,12 @@ approach. - jayde */
   }
 
   if (isError) {
-    return <p>Error retrieving data!</p>
+    const message = `Error retrieving data!`
+    return (
+      <>
+        <ErrorMessage message={message} />
+      </>
+    )
   }
 
   return (

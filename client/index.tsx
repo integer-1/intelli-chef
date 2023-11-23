@@ -11,8 +11,8 @@ const router = createBrowserRouter(routes)
 document.addEventListener('DOMContentLoaded', () => {
   createRoot(document.getElementById('app') as HTMLElement).render(
     <Auth0Provider
-      domain="dev-a47m0thhvamamzku.au.auth0.com"
-      clientId="HT2Wd8CSNAjXEOoLYtWXLq0SGZtTLSOV"
+      domain="intelli-chef.au.auth0.com"
+      clientId="ZUlBJRZHmtY30ImRXOeQGMKNb5x80zLx"
       authorizationParams={{
         redirect_uri: window.location.origin,
         audience: 'https://Intelli-chef/api',
