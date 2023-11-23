@@ -1,13 +1,5 @@
 /* /SavedRecipeCard/:id */
-
-/* var(--tahuna-sands): #fff0ce;
-var(--olivine): #80bb77;
-var(--calico): #dcc184;
-var(--royal-health): #b43969;
-var(--bleached-cedar): #261b32; */
-
 .recipe-container {
-  
   margin: 3% 30% 3% 3%;
   background-color: white;
   background-image: none;
