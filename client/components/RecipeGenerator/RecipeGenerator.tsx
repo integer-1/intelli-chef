@@ -94,7 +94,7 @@ function RecipeGenerator() {
   }
 
   return (
-    <div className={styles['recipe-gen']}>
+    <div className={styles['recipe-gen']} id="recipe-generator">
       <div className={styles.header}>
         <h2>Recipe Generator</h2>
         <button onClick={fetchData} className={styles['button']}>

@@ -22,8 +22,12 @@ const SideBar = () => {
 
   const menuItem = [
     { path: '/', name: 'Home', icon: <FridgeIcon /> },
-    { path: '/ManageMyRecipes', name: 'Manage My Recipes', icon: <RecipesIcon />},
-    { path: '/', name: 'My Recipe Card', icon: <KitchenIcon /> },
+    {
+      path: '/ManageMyRecipes',
+      name: 'Manage My Recipes',
+      icon: <RecipesIcon />,
+    },
+    { path: '/', name: 'Recipe Generator', icon: <KitchenIcon /> },
   ]
 
   return (
@@ -58,20 +62,23 @@ const SideBar = () => {
           </h1>
 
           {menuItem.map((item, index) => (
-            <NavLink
-              to={item.path}
-              key={index}
-              className={styles[`link${isOpen ? '' : '-close'}`]}
-            >
-              <div className={styles['icon']}>{item.icon}</div>
-              <div
-                style={{ display: isOpen ? 'block' : 'none' }}
-                className={styles['link_text']}
+            <div key={index}>
+              <NavLink
+                to={item.path}
+                className={styles[`link${isOpen ? '' : '-close'}`]}
+                key={index}
               >
-                {item.name}
-              </div>
-            </NavLink>
+                <div className={styles['icon']}>{item.icon}</div>
+                <div
+                  style={{ display: isOpen ? 'block' : 'none' }}
+                  className={styles['link_text']}
+                >
+                  {item.name}
+                </div>
+              </NavLink>
+            </div>
           ))}
+
           <div style={{ display: isOpen ? 'block' : 'none' }}>
             <MyRecipeList authId={user?.sub || ''} />
 
