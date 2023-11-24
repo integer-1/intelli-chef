@@ -22,8 +22,8 @@ const SideBar = () => {
 
   const menuItem = [
     { path: '/', name: 'Home', icon: <FridgeIcon /> },
-    { path: '/MyKitchen', name: 'My Kitchen', icon: <KitchenIcon /> },
-    { path: '/', name: 'My Recipe Card', icon: <RecipesIcon /> },
+    { path: '/ManageMyRecipes', name: 'Manage My Recipes', icon: <RecipesIcon />},
+    { path: '/', name: 'My Recipe Card', icon: <KitchenIcon /> },
   ]
 
   return (
