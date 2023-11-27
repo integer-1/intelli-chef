@@ -1,11 +1,12 @@
 /* Side Bar */
+
 .sidebar-container {
   display: flex;
   position: fixed;
   top: 0;
   right: 0;
   margin: 5px;
-  background-color: #fff0ce;
+  background-color: var(--tahuna-sands);
   background-image: none;
   background-position: 0 90%;
   background-repeat: repeat no-repeat;
@@ -15,7 +16,7 @@
   border-width: 2px;
   box-shadow: rgba(0, 0, 0, 0.2) 15px 28px 25px -18px;
   box-sizing: border-box;
-  color: #41403e;
+  color: var(--bleached-cedar);
   display: inline-block;
   font-family: Neucha, sans-serif;
   outline: none;
@@ -29,7 +30,7 @@
 }
 
 .sidebar {
-  color: black;
+  color: var(--bleached-cedar);
   height: 100vh;
   width: 300px;
   transition: width 0.5s;
@@ -51,7 +52,7 @@
 .sidebar .link,
 .sidebar .link-close {
   display: flex;
-  color: black;
+  color: var(--bleached-cedar);
   padding: 15px 10px;
   gap: 30px;
   transition: all 0.5s;
@@ -69,7 +70,7 @@
 
 .sidebar .link:hover,
 .sidebar .link-close:hover {
-  color: rgb(247, 62, 11);
+  color: var(--royal-health);
   background-color: white;
   background-image: none;
   background-position: 0 90%;
@@ -80,7 +81,7 @@
   border-width: 2px;
   box-shadow: rgba(0, 0, 0, 0.2) 15px 28px 25px -18px;
   box-sizing: border-box;
-  color: rgb(237, 111, 75);
+  color: var(--olivine);
   cursor: pointer;
   font-family: Neucha, sans-serif;
   font-size: 1rem;
@@ -100,14 +101,18 @@
 
 .sidebar .authentication {
   align-items: center;
-  font-size: 28px;
+  font-size: 18px;
   text-align: center;
 }
-
+.sidebar .welcome {
+  align-items: center;
+  font-size: 22px;
+  text-align: center;
+}
 .sidebar .login-button {
   margin-top: 20px;
   align-self: center;
-  background-color: #e9e8e8;
+  background-color: var(--calico);
   background-image: none;
   background-position: 0 90%;
   background-repeat: repeat no-repeat;
@@ -117,7 +122,7 @@
   border-width: 2px;
   box-shadow: rgba(0, 0, 0, 0.2) 15px 28px 25px -18px;
   box-sizing: border-box;
-  color: #41403e;
+  color: var(--bleached-cedar);
   cursor: pointer;
   display: inline-block;
   font-family: Neucha, sans-serif;
@@ -162,7 +167,7 @@
   border-width: 2px;
   box-shadow: rgba(0, 0, 0, 0.2) 15px 28px 25px -18px;
   box-sizing: border-box;
-  color: #41403e;
+  color: var(--bleached-cedar);
   display: inline-block;
   font-family: Neucha, sans-serif;
   outline: none;
@@ -181,7 +186,7 @@
 }
 
 .recipe-list ul li {
-  color: black;
+  color: var(--bleached-cedar);
   margin-left: 8px;
   font-size: 15px;
 }

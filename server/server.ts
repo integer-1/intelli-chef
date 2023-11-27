@@ -4,9 +4,12 @@ import recipesRoutes from './routes/recipes.ts'
 import * as Path from 'node:path'
 import express from 'express'
 import cors from 'cors'
-import { config } from 'dotenv'
-config()
+import dotenv from 'dotenv'
 
+if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+  const envConfig = dotenv.config()
+  if (envConfig.error) throw envConfig.error
+}
 const apiChatKey = process.env.CHAT_API_KEY
 
 const server = express()
@@ -33,7 +36,7 @@ server.post('/completions', async (req, res) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      model: 'gpt-3.5-turbo',
+      model: 'gpt-4',
       messages: [{ role: 'user', content: req.body.message }],
       max_tokens: 1000,
     }),
@@ -47,7 +50,7 @@ server.post('/completions', async (req, res) => {
     console.log('OpenAI API Response:', data)
     res.send(data)
   } catch (error) {
-    console.error(error)
+    res.status(500).json({ message: 'Error communicating with OpenAI API' })
   }
 })
 

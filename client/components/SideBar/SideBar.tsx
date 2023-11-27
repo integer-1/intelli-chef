@@ -22,8 +22,12 @@ const SideBar = () => {
 
   const menuItem = [
     { path: '/', name: 'Home', icon: <FridgeIcon /> },
-    { path: '/MyKitchen', name: 'My Kitchen', icon: <KitchenIcon /> },
-    { path: '/RecipeCard', name: 'My Recipe Card', icon: <RecipesIcon /> },
+    {
+      path: '/ManageMyRecipes',
+      name: 'Manage My Recipes',
+      icon: <RecipesIcon />,
+    },
+    { path: '/', name: 'Recipe Generator', icon: <KitchenIcon /> },
   ]
 
   return (
@@ -50,28 +54,31 @@ const SideBar = () => {
         </div>
 
         <IfAuthenticated>
-          <p
+          <h1
             className={styles['authentication']}
             style={{ display: isOpen ? 'block' : 'none' }}
           >
             {user?.nickname}`s recipes
-          </p>
+          </h1>
 
           {menuItem.map((item, index) => (
-            <NavLink
-              to={item.path}
-              key={index}
-              className={`$styles[link]} ${isOpen ? '' : styles['-close']}`}
-            >
-              <div className={styles['icon']}>{item.icon}</div>
-              <div
-                style={{ display: isOpen ? 'block' : 'none' }}
-                className={styles['link_text']}
+            <div key={index}>
+              <NavLink
+                to={item.path}
+                className={styles[`link${isOpen ? '' : '-close'}`]}
+                key={index}
               >
-                {item.name}
-              </div>
-            </NavLink>
+                <div className={styles['icon']}>{item.icon}</div>
+                <div
+                  style={{ display: isOpen ? 'block' : 'none' }}
+                  className={styles['link_text']}
+                >
+                  {item.name}
+                </div>
+              </NavLink>
+            </div>
           ))}
+
           <div style={{ display: isOpen ? 'block' : 'none' }}>
             <MyRecipeList authId={user?.sub || ''} />
 
@@ -82,7 +89,13 @@ const SideBar = () => {
         </IfAuthenticated>
 
         <IfNotAuthenticated>
-          <p>Please log in here</p>
+          <h1 className={styles['welcome']}>Welcome Guest</h1>
+          <p
+            className={styles['authentication']}
+            style={{ display: isOpen ? 'block' : 'none' }}
+          >
+            Please log in here
+          </p>
           <button
             className={styles['login-button']}
             onClick={() => loginWithRedirect()}

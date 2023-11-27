@@ -18,7 +18,7 @@ export async function updateIngredient(
   id: number,
   updatedData: IngredientData,
   db = connection
-) {
+): Promise<Ingredient[]> {
   return db('ingredients')
     .where({ id })
     .update({ ...updatedData })

@@ -45,7 +45,7 @@ export async function seed(knex) {
         Garnish the stir-fry with sliced green onions. Taste and adjust the seasoning if necessary.
         
         Serve the onion and pork stir-fry over cooked rice.`,
-      auth0_id: 'auth0|655b4ab77ebf1e881985fe63',
+      auth0_id: 'auth0|655fcfeae42b5631f3fabdf4',
     },
     {
       id: 1002,
@@ -111,7 +111,7 @@ export async function seed(knex) {
 
         5. Serve:
         Serve the Grilled Lemon Herb Chicken with your favorite side dishes. Enjoy!`,
-      auth0_id: 'auth0|6556c9c747db98bd7f4edb4f',
+      auth0_id: 'auth0|655fcfeae42b5631f3fabdf4',
     },
     // Add more recipes as needed
   ])

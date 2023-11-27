@@ -5,6 +5,7 @@ import { Ingredient, IngredientData } from '../../../models/ingredients'
 import { useIngredient } from '../../hooks/useIngredient'
 
 import styles from './KitchenBuilder.module.css'
+import ErrorMessage from '../Error/ErrorMessage'
 
 function KitchenBuilder() {
   const {
@@ -44,7 +45,12 @@ approach. - jayde */
         const updatedIngredients = await getAllIngredients()
         setSelectedIngredients([...updatedIngredients])
       } catch (e) {
-        console.error('Error adding ingredient:', e)
+        const message = `Error adding ingredient: ${e}`
+        return (
+          <>
+            <ErrorMessage message={message} />
+          </>
+        )
       }
     }
   }
@@ -61,7 +67,12 @@ approach. - jayde */
       const updatedIngredients = await getAllIngredients()
       setSelectedIngredients([...updatedIngredients])
     } catch (error) {
-      console.error('Error deleting ingredient:', error)
+      const message = `Error deleting ingredient: ${error}`
+      return (
+        <>
+          <ErrorMessage message={message} />
+        </>
+      )
     }
   }
 
@@ -70,37 +81,42 @@ approach. - jayde */
   }
 
   if (isError) {
-    return <p>Error retrieving data!</p>
+    const message = `Error retrieving data!`
+    return (
+      <>
+        <ErrorMessage message={message} />
+      </>
+    )
   }
 
   return (
-    <div className={styles['kitchen-builder-wrapper']}>
-      <div className={styles['kitchen-builder']}>
-        <h2>What&apos;s in my Kitchen?</h2>
-        <input
-          type="text"
-          placeholder="Add ingredient..."
-          value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)}
-          onKeyDown={handleKeyDown}
-        />
-        <div>
-          <div className={styles['kitchen-box']}>
-            <div className={styles['kitchen-items']}>
-              {selectedIngredients.map((ingredient, index) => (
-                <div className={styles['item-box']} key={index}>
-                  {ingredient.item_name}
-                  <button onClick={() => handleDeleteFromKitchen(ingredient)}>
-                    <div className={styles['img-wrapper']}>
-                      <img src="/svg/x.svg" alt="delete button"></img>
-                    </div>
-                  </button>
-                </div>
-              ))}
-              {searchInput && (
-                <div className={styles['item-box']}>{searchInput}</div>
-              )}
-            </div>
+    <div className={styles['kitchen-builder']}>
+      <h2>What&apos;s in your kitchen?</h2>
+      <label htmlFor="ingredientInput">::</label>
+      <input
+        type="text"
+        id="ingredientInput"
+        placeholder="Add ingredient..."
+        value={searchInput}
+        onChange={(e) => setSearchInput(e.target.value)}
+        onKeyDown={handleKeyDown}
+      />
+      <div>
+        <div className={styles['kitchen-box']}>
+          <div className={styles['kitchen-items']}>
+            {selectedIngredients.map((ingredient, index) => (
+              <div className={styles['item-box']} key={index}>
+                {ingredient.item_name}
+                <button onClick={() => handleDeleteFromKitchen(ingredient)}>
+                  <div className={styles['img-wrapper']}>
+                    <img src="/svg/x.svg" alt="delete button"></img>
+                  </div>
+                </button>
+              </div>
+            ))}
+            {searchInput && (
+              <div className={styles['item-box']}>{searchInput}</div>
+            )}
           </div>
         </div>
       </div>

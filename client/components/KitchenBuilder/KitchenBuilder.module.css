@@ -1,18 +1,20 @@
-.kitchen-builder-wrapper{
-  display: flex;
-  justify-content: center;
-  margin-left: -100px;
-}
-
 .kitchen-builder{
   margin: 10px;
 }
 
 .kitchen-builder h2{
-  font-family: 'Itim';
-  font-size: 25px;
-  margin: 0;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+}
+
+.kitchen-builder label{
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
 
 .kitchen-builder input{
@@ -62,6 +64,7 @@
 }
 
 .kitchen-box{
+  background-color: var(--tahuna-sands);
   background-image: url('/images/img.png');
   background-size: 100%;
   opacity: 1;
@@ -70,8 +73,8 @@
   border: 2px solid var(--bleached-cedar);
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
   min-height: calc(fit-content + 100px);
-  width: 65vh;
-  height: 50vh;
+  width: 55vh;
+  height: 45vh;
   border-bottom-left-radius: 15px 255px;
   border-bottom-right-radius: 225px 15px;
   border-top-left-radius: 235px 15px;

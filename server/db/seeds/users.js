@@ -11,7 +11,7 @@ export async function seed(knex) {
       id: 2,
       nickname: 'suwon',
       email: 'suwon@gg.com',
-      auth0_id: 'auth0|6556c9c747db98bd7f4edb4f',
+      auth0_id: 'auth0|655fcfeae42b5631f3fabdf4',
     },
   ])
 }
