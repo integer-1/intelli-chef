@@ -12,11 +12,11 @@ function RecipeGenerator() {
   const [recipeList, setRecipeList] = useState<Recipes[]>()
 
   //set initial recipeList if returning from recipe view
-  useEffect(() => {
-    if (state) {
-      setRecipeList(state)
-    }
-  }, [state])
+  // useEffect(() => {
+  //   if (state) {
+  //     setRecipeList(state)
+  //   }
+  // }, [state])
 
   const {
     data: ingredients,
@@ -42,7 +42,7 @@ function RecipeGenerator() {
       const ingredientsList = ingredients
         .map((ingredient) => ingredient.item_name)
         .join(', ')
-      const prompt = `From now you when you respond you will only provide a codeblock with json and nothing else. You will consider this list of ingredients: ${ingredientsList} and provide a maximum of 3 recipes containing ONLY the ingredients specific and absolutely no additional ingredients. The json will have the following properties: dish_name, preparation_time, cooking_time, servings, ingredients and method. Please store each step of method as a string array. Remember you must provide only a codeblock containing json, absolutely no additional text.`
+      const prompt = `From now you when you respond you will only provide a codeblock with json and nothing else. You will consider this list of ingredients: ${ingredientsList} and provide a maximum of 3 recipes containing ONLY the ingredients specific and absolutely no additional ingredients. The json will have the following properties: dish_name, preparation_time, cooking_time, servings, ingredients and method. Please store each step of method as a string array. Remember you must provide only a codeblock containing json, absolutely no additional text. If ${ingredientsList} is empty, return this message "Please provide ingredients".`
 
       const options = {
         method: 'POST',
@@ -63,6 +63,7 @@ function RecipeGenerator() {
       const data = await response.json()
 
       if (data.choices && data.choices.length > 0) {
+        //console.log(data.choices[0].message['content'])
         const stringValue1: string = data.choices[0].message['content']
         const refinedData = stringValue1.replace(/\\|\n|`|json|/g, '')
         const jsonArray = JSON.parse(refinedData)
@@ -104,7 +105,9 @@ function RecipeGenerator() {
       <div>
         <h3>Chat GPT : </h3>
         <ul>
-          {recipeList && recipeList.length > 0 ? (
+          {recipeList === null ? (
+            <p>Loading...</p>
+          ) : recipeList?.length ? (
             recipeList.map((recipe) => (
               <li key={recipe.dish_name}>
                 <Link
