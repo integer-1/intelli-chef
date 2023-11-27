@@ -54,7 +54,10 @@ function RecipeGenerator() {
         },
       }
 
-      const response = await fetch('http://localhost:3000/completions', options)
+      const response = await fetch(
+        'https://intelli-chef.devacademy.nz/completions',
+        options
+      )
 
       if (!response.ok) {
         throw new Error(`Server responded with status: ${response.status}`)
