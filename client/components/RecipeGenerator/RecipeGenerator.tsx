@@ -10,6 +10,7 @@ function RecipeGenerator() {
   //state of recipeList is passed to/from RecipeCard to provide go-back functionality
   const { state } = useLocation()
   const [recipeList, setRecipeList] = useState<Recipes[]>()
+  const [isSearching, setIsSearching] = useState(false)
 
   //set initial recipeList if returning from recipe view
   useEffect(() => {
@@ -24,8 +25,11 @@ function RecipeGenerator() {
     isError,
   } = useQuery(['ingredients'], getAllIngredients)
 
+  let ingredientsList: string
+
   const fetchData = async () => {
     try {
+      setIsSearching(true)
       if (isLoading) {
         return <p>Loading...</p>
       }
@@ -39,7 +43,7 @@ function RecipeGenerator() {
         )
       }
 
-      const ingredientsList = ingredients
+      ingredientsList = ingredients
         .map((ingredient) => ingredient.item_name)
         .join(', ')
       const prompt = `From now you when you respond you will only provide a codeblock with json and nothing else. You will consider this list of ingredients: ${ingredientsList} and provide a maximum of 3 recipes containing ONLY the ingredients specific and absolutely no additional ingredients. The json will have the following properties: dish_name, preparation_time, cooking_time, servings, ingredients and method. Please store each step of method as a string array. Remember you must provide only a codeblock containing json, absolutely no additional text.`
@@ -93,6 +97,8 @@ function RecipeGenerator() {
           <ErrorMessage message={message} />
         </>
       )
+    } finally {
+      setIsSearching(false)
     }
   }
 
@@ -107,7 +113,14 @@ function RecipeGenerator() {
       <div>
         <h3>Chat GPT : </h3>
         <ul>
-          {recipeList && recipeList.length > 0 ? (
+          {!ingredients || ingredients.length === 0 ? (
+            <p>
+              No ingredients selected. Please add at least one item on the
+              kitchen to continue.
+            </p>
+          ) : isSearching ? (
+            <p>Loading recipes...</p>
+          ) : recipeList?.length ? (
             recipeList.map((recipe) => (
               <li key={recipe.dish_name}>
                 <Link
