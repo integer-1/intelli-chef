@@ -31,7 +31,7 @@ function RecipeGenerator() {
     try {
       setIsSearching(true)
       if (isLoading) {
-        return
+        return <p>Loading...</p>
       }
 
       if (isError) {
@@ -43,31 +43,33 @@ function RecipeGenerator() {
         )
       }
 
-      const ingredientsList = ingredients
+      ingredientsList = ingredients
         .map((ingredient) => ingredient.item_name)
         .join(', ')
-      const prompt = `From now you when you respond you will only provide a codeblock with json and nothing else. You will consider this list of ingredients: ${ingredientsList} and provide a maximum of 3 recipes containing ONLY the ingredients specific and absolutely no additional ingredients. The json will have the following properties: dish_name, preparation_time, cooking_time, servings, ingredients and method. Please store each step of method as a string array. Remember you must provide only a codeblock containing json, absolutely no additional text. If ${ingredientsList} is empty, return this message "Please provide ingredients".`
+      const prompt = `From now you when you respond you will only provide a codeblock with json and nothing else. You will consider this list of ingredients: ${ingredientsList} and provide a maximum of 3 recipes containing ONLY the ingredients specific and absolutely no additional ingredients. The json will have the following properties: dish_name, preparation_time, cooking_time, servings, ingredients and method. Please store each step of method as a string array. Remember you must provide only a codeblock containing json, absolutely no additional text.`
 
-        const options = {
-          method: 'POST',
-          body: JSON.stringify({
-            message: prompt,
-          }),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
+      const options = {
+        method: 'POST',
+        body: JSON.stringify({
+          message: prompt,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
 
-      const response = await fetch('http://localhost:3000/completions', options)
+      const response = await fetch(
+        'https://intelli-chef.devacademy.nz/completions',
+        options
+      )
 
-        if (!response.ok) {
-          throw new Error(`Server responded with status: ${response.status}`)
-        }
+      if (!response.ok) {
+        throw new Error(`Server responded with status: ${response.status}`)
+      }
 
-        const data = await response.json()
+      const data = await response.json()
 
       if (data.choices && data.choices.length > 0) {
-        //console.log(data.choices[0].message['content'])
         const stringValue1: string = data.choices[0].message['content']
         const refinedData = stringValue1.replace(/\\|\n|`|json|/g, '')
         const jsonArray = JSON.parse(refinedData)
@@ -95,6 +97,8 @@ function RecipeGenerator() {
           <ErrorMessage message={message} />
         </>
       )
+    } finally {
+      setIsSearching(false)
     }
   }
 
@@ -109,8 +113,13 @@ function RecipeGenerator() {
       <div>
         <h3>Chat GPT : </h3>
         <ul>
-          {recipeList === null ? (
-            <p>Loading...</p>
+          {!ingredients || ingredients.length === 0 ? (
+            <p>
+              No ingredients selected. Please add at least one item on the
+              kitchen to continue.
+            </p>
+          ) : isSearching ? (
+            <p>Loading recipes...</p>
           ) : recipeList?.length ? (
             recipeList.map((recipe) => (
               <li key={recipe.dish_name}>
