@@ -119,7 +119,7 @@ function RecipeGenerator() {
               kitchen to continue.
             </p>
           ) : isSearching ? (
-            <p>Loading data...</p>
+            <p>Loading recipes...</p>
           ) : recipeList?.length ? (
             recipeList.map((recipe) => (
               <li key={recipe.dish_name}>
