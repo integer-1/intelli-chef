@@ -4,9 +4,12 @@ import recipesRoutes from './routes/recipes.ts'
 import * as Path from 'node:path'
 import express from 'express'
 import cors from 'cors'
-import { config } from 'dotenv'
-config()
+import dotenv from 'dotenv'
 
+if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+  const envConfig = dotenv.config()
+  if (envConfig.error) throw envConfig.error
+}
 const apiChatKey = process.env.CHAT_API_KEY
 
 const server = express()
