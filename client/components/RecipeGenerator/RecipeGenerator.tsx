@@ -10,6 +10,7 @@ function RecipeGenerator() {
   //state of recipeList is passed to/from RecipeCard to provide go-back functionality
   const { state } = useLocation()
   const [recipeList, setRecipeList] = useState<Recipes[] | null>(null)
+  const [isSearching, setIsSearching] = useState(false)
 
   //set initial recipeList if returning from recipe view
   // useEffect(() => {
@@ -29,7 +30,7 @@ function RecipeGenerator() {
   const fetchData = async () => {
     try {
       if (isLoading) {
-        return <p>Loading...</p>
+        return
       }
 
       if (isError) {
@@ -71,7 +72,6 @@ function RecipeGenerator() {
         const data = await response.json()
 
         if (data.choices && data.choices.length > 0) {
-          //console.log(data.choices[0].message['content'])
           const stringValue1: string = data.choices[0].message['content']
           const refinedData = stringValue1.replace(/\\|\n|`|json|/g, '')
           const jsonArray = JSON.parse(refinedData)
@@ -84,6 +84,7 @@ function RecipeGenerator() {
               : String(jsonArray[i].method)
           }
           setRecipeList(jsonArray)
+          console.log(recipeList)
         } else {
           const message = `'No choices found in the response.`
           return (
@@ -102,6 +103,8 @@ function RecipeGenerator() {
           <ErrorMessage message={message} />
         </>
       )
+    } finally {
+      setIsSearching(false)
     }
   }
 
@@ -118,8 +121,11 @@ function RecipeGenerator() {
         <ul>
           {!ingredients || ingredients.length === 0 ? (
             <p>
-              No ingredients selected. Please add at least one item to continue.
+              No ingredients selected. Please add at least one item on the
+              kitchen to continue.
             </p>
+          ) : isSearching ? (
+            <p>Loading data...</p>
           ) : recipeList?.length ? (
             recipeList.map((recipe) => (
               <li key={recipe.dish_name}>
