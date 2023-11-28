@@ -24,8 +24,8 @@ const SavedRecipeCard: React.FC<RecipeProps> = (recipe) => {
       <div className={styles['recipe-container']}>
         <div className={styles['recipe']}>
           <p className={styles['dish-name']}>{recipe.recipe.dish_name}</p>
-          <p>Preparation Time: {recipe.recipe.preparation_time} minutes</p>
-          <p>Cooking Time: {recipe.recipe.cooking_time} minutes</p>
+          <p>Preparation Time: {recipe.recipe.preparation_time}</p>
+          <p>Cooking Time: {recipe.recipe.cooking_time}</p>
           <p>Servings: {recipe.recipe.servings}</p>
           <h2>Ingredients</h2>
           <ul className={styles['ingredients']}>
