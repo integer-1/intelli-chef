@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   createRoot(document.getElementById('app') as HTMLElement).render(
     <Auth0Provider
       domain="intelli-chef.au.auth0.com"
-      clientId="ZUlBJRZHmtY30ImRXOeQGMKNb5x80zLx"
+      clientId="mJKInn1QJXARzBqz4XJeVAqpNl9kjJzf"
       authorizationParams={{
         redirect_uri: window.location.origin,
         audience: 'https://Intelli-chef/api',
