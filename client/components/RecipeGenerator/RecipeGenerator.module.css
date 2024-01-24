@@ -4,7 +4,7 @@
 
 .recipe-gen .header{
   display:flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 
 .recipe-nav{
@@ -15,6 +15,7 @@
 }
 
 .button {
+  margin-left: 20px ;
   align-self: center;
   background-color: var(--calico);
   background-image: none;

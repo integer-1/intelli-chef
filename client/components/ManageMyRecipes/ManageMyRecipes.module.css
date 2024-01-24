@@ -1,5 +1,6 @@
 .manage-container {
   margin: 10px;
+  margin-right: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -7,10 +8,9 @@
 }
 .manage-box {
   align-items: center;
-
   display: flex;
   width: 30%;
-  margin: 30px;
+  margin: 20px;
   text-align: center;
   background-color: white;
   background-image: none;
@@ -100,4 +100,20 @@
 .button-container .delete-button:focus,
 .button-container .view-button:focus {
   box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 4px -6px;
+}
+
+@media (max-width: 1000px) {
+  .manage-container {
+    margin-right: 100px;
+  }
+  .manage-box {
+    width: 40%;
+  }
+  
+}
+@media (max-width: 600px) {
+  .manage-box {
+    width: 90%;
+    margin-right: 200px;
+  }
 }
