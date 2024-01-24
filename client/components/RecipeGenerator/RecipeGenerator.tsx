@@ -33,7 +33,6 @@ function RecipeGenerator() {
       if (isLoading) {
         return <p>Loading...</p>
       }
-
       if (isError) {
         const message = `Error retrieving data!`
         return (
