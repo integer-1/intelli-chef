@@ -59,7 +59,7 @@ function RecipeGenerator() {
       }
 
       const response = await fetch(
-        'https://intelli-chef.devacademy.nz/completions',
+        'https://intelli-chef.pushed.nz/completions',
         options
       )
 
